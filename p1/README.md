@@ -7,18 +7,24 @@ _Any instructions/notes in italics should be removed from the template before su
 ## Game planning
 _In plain english - no code - think through how you'll make this game work. Example:_
 + _Create an array of two options, heads and tails._
-+ _Randomly choose one of these options from the array and assign it as Player A's move_
-+ _Assign Player B's move to whatever option was not chosen._
-+ _Randomly choose from the array of heads/tails again and assign this as the "flip" value_
-+ _If Player A's move matches "flip", then assign a value winner to Player A_
-+ _Otherwise, assign a value winner to Player B_
-+ _Report the results of Player A's Move, Player B's move, the flip, and the winner to the page_
++ _Name one player Mike, and the other player Kara
++ _Randomly choose one of these options from the array and assign it as Mike's move_
++ _Randomly choose one of these options from the array and assign it as Kara's move_
++ _Check to see if Mike's move is the same as Kara's move or different than Kara's move_
++_If the moves are the same, Mike gets one point and Kara loses one point_
++_If the moves are different, Mike loses one point and Kara gets one point_
++ _Report the results of Mike's Move, Kara's move, Output should also explain what player earned a point and what player lost a point_
+
 
 
 
 
 ## Outside resources
 *your list of outside resources go here*
+*[Matching Pennies](https://en.wikipedia.org/wiki/Matching_pennies)*
+
 
 ## Notes for instructor
 *any notes for me to refer to while grading; if none, omit this section*
++ _I will work on variants of the game once I have this completed._
++ _Variants could include playing the game multiple times, and tallying scores for both players_
