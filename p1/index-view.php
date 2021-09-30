@@ -17,6 +17,9 @@
     <h2>Results</h2>
     <ul <li>...</li>
     </ul>
+    <p>
+        Player 1 Card is <?php echo $cardName; ?> of <?php echo $cardSuit; ?> .
+    </p>
 </body>
 
 </html>

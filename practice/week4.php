@@ -103,17 +103,17 @@ shuffle($deck);
 
 while (count($deck) > 0) {
     $drawCard = array_shift($deck);
-    var_dump($drawCard);
+    // var_dump($drawCard);
     array_push($playerOneCards, $drawCard);
     $drawCard = array_shift($deck);
-    var_dump($drawCard);
+    // var_dump($drawCard);
     array_push($playerTwoCards, $drawCard);
 }
 
-
+echo $playerOneCards[1];
 
 var_dump($playerOneCards);
-var_dump($playerTwoCards);
+// var_dump($playerTwoCards);
 
 
 
