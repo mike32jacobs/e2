@@ -18,7 +18,12 @@
     <ul <li>...</li>
     </ul>
     <p>
-        Player 1 Card is <?php echo $cardName; ?> of <?php echo $cardSuit; ?> .
+        Player 1 Card is <?php echo $cardName; ?> of <?php echo $cardSuit; ?>.
+        Player 1 has <?php echo $cardsRemainingP1; ?> cards remaining. Player 2 has <?php echo $cardsRemainingP2; ?>
+        cards remaining.
+        The winner is <?php echo $winner; ?>.
+        The game took <?php echo $roundsPlayed; ?> rounds to complete.
+
     </p>
 </body>
 
