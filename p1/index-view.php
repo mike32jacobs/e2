@@ -2,6 +2,24 @@
 <html lang='en'>
 
 <head>
+    <style>
+    table {
+        width: 100%
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    tr:nth-child(even) {
+        background-color: #D6EEEE;
+    }
+    </style>
     <title>Project 1</title>
     <meta charset='utf-8'>
     <link href=data:, rel=icon>
