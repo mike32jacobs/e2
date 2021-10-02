@@ -71,27 +71,25 @@ $deck = [
 ];
 
 
-echo $deck[0]['name'];
-// var_dump($deck);
+// Shuffle the "deck."
 
-// + _Shuffle the "deck."_
 shuffle($deck);
-echo $deck[0]['name'];
-echo $deck[0]['suit'];
 
-$cardName = $deck[0]['name'];
-$cardSuit = $deck[0]['suit'];
+// $cardName = $deck[0]['name'];
+// $cardSuit = $deck[0]['suit'];
 
 // Create an array for each player's hand
+
 $player1Hand = [];
 $player2Hand = [];
 
 
 
 // Create a variable to count the number of rounds played.
+
 $roundsPlayed = 0;
 
-// + _Deal cards to each player. Toggle from player to player until the cards are gone.
+// Deal cards to each player. Toggle from player to player until the cards are gone.
 
 $dealTo ='player1';
 
@@ -108,54 +106,67 @@ while (count($deck) > 0) {
     
 }
 
-// var_dump($player1Hand);
-// var_dump($player2Hand);
-
 // Create variable to keep track of how many cards in each player's hand. 
 $cardsRemainingP1 = count($player1Hand);
 $cardsRemainingP2 = count($player2Hand);
 
-// Play the game until one player has zero cards left. I will use a while loop to accomplish this._
+// Create arrays to keep track of the data from each round. One array for each piece of info.
+
+$p1CardsPlayedData = [];
+$p2CardsPlayedData = [];
+$roundWinnersData = [];
+$cardsRemainingP1Data = [];
+$cardsRemainingP2Data =[]; 
+
+// Play the game until one player has zero cards left.
 
 while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
     
-    // + _Once both players have their cards, they should take the card off the top, and place it on the board._
+    // Once both players have their cards, they should take the card off the top, and place it on the board.
 
     $p1Card = array_shift($player1Hand);
     $p2Card = array_shift($player2Hand);
 
-    // + _Compare the values of player1Card and player2Card. The interesting thing will be how to compare cards. The result of the comparison will either add cards to one of the player's hands or discard them.
+    // Compare the values of player1Card and player2Card. The interesting thing will be how to compare cards. The result of the comparison will either add cards to one of the player's hands or discard them.
 
     $roundWinner = 'tie';
     
     if ($p1Card['value'] == $p2Card['value']){
-        //It is a tie. Both cards are removed
+        // It is a tie. Both cards are removed
+
         $roundWinner = 'tie';
     } elseif ($p1Card['value'] > $p2Card['value']) {
-        //Player one wins. Add both card to player1Hand
+        // Player one wins. Add both card to player1Hand
+
         array_push($player1Hand, $p1Card);
         array_push($player1Hand, $p2Card);
         $roundWinner = 'Player 1';
 
     } else {
         // Player 2 wins. Add both cards to player2Hand
+
         array_push($player2Hand, $p1Card);
         array_push($player2Hand, $p2Card);
         $roundWinner = 'Player 1';
     }
 
-    // count the round #, and cards in each player's hand
+    // Count cards in each player's hand, and iterate the round #
     
     $cardsRemainingP1 = count($player1Hand);
     $cardsRemainingP2 = count($player2Hand);
-    echo $cardsRemainingP1 .'cards remaining for Player 1.';
-    echo $cardsRemainingP2 .'cards remaining for Player 2.';
-    echo $roundsPlayed++ . 'rounds have been played';
     $roundsPlayed++;
+
+    // Enter the data from the round into appropriate arrays
+
+    array_push($p1CardsPlayedData, $p1Card);
+    array_push($p2CardsPlayedData, $p2Card);
+    array_push($roundWinnersData, $roundWinner);
+    array_push($cardsRemainingP1Data, $cardsRemainingP1);
+    array_push($cardsRemainingP2Data, $cardsRemainingP2);
 
 }
 
-// Determine the winner
+// Determine the game winner
 $gameWinner = null;
 if (count($player1Hand) == 0) {
     $gameWinner = 'Player 2';
