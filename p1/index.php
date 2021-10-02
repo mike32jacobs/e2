@@ -85,9 +85,7 @@ $cardSuit = $deck[0]['suit'];
 $player1Hand = [];
 $player2Hand = [];
 
-// Create variable to keep track of how many cards in each player's hand. 
-$cardsRemainingP1 = count($player1Hand);
-$cardsRemainingP2 = count($player2Hand);
+
 
 // Create a variable to count the number of rounds played.
 $roundsPlayed = 0;
@@ -112,13 +110,14 @@ while (count($deck) > 0) {
 var_dump($player1Hand);
 var_dump($player2Hand);
 
+// Create variable to keep track of how many cards in each player's hand. 
+$cardsRemainingP1 = count($player1Hand);
+$cardsRemainingP2 = count($player2Hand);
 
 // Play the game until one player has zero cards left. I will use a while loop to accomplish this._
 
 while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
-    echo $cardsRemainingP1;
-    echo $cardsRemainingP2;
-
+    
     // + _Once both players have their cards, they should take the card off the top, and place it on the board._
 
     $p1Card = array_shift($player1Hand);
@@ -138,8 +137,15 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
         array_push($player2Hand, $p2Card);
     }
 
-    // count the round #
+    // count the round #, and cards in each player's hand
+    
+    $cardsRemainingP1 = count($player1Hand);
+    $cardsRemainingP2 = count($player2Hand);
+    echo $cardsRemainingP1 .'cards remaining for Player 1.';
+    echo $cardsRemainingP2 .'cards remaining for Player 2.';
+    echo $roundsPlayed++ . 'rounds have been played';
     $roundsPlayed++;
+
 }
 
 // Determine the winner

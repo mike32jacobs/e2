@@ -48,6 +48,7 @@ _In plain english - no code - think through how you'll make this game work. Exam
 *[Matching Pennies](https://en.wikipedia.org/wiki/Matching_pennies)*
 *[Stack Overflow - conditional while loop in php](https://stackoverflow.com/questions/2435457/conditional-while-loop-in-php)*
 *[W3 schools - PHP if...else...elseif Statements](https://www.w3schools.com/php/php_if_else.asp)*
+*[PHP create HTML table with a while loop - tutorial 09.3](https://youtu.be/N_S7_wg87GU)*
 
 
 ## Notes for instructor
