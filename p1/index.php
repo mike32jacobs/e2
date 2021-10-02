@@ -77,6 +77,7 @@ echo $deck[0]['name'];
 // + _Shuffle the "deck."_
 shuffle($deck);
 echo $deck[0]['name'];
+echo $deck[0]['suit'];
 
 $cardName = $deck[0]['name'];
 $cardSuit = $deck[0]['suit'];
@@ -107,8 +108,8 @@ while (count($deck) > 0) {
     
 }
 
-var_dump($player1Hand);
-var_dump($player2Hand);
+// var_dump($player1Hand);
+// var_dump($player2Hand);
 
 // Create variable to keep track of how many cards in each player's hand. 
 $cardsRemainingP1 = count($player1Hand);
@@ -125,16 +126,22 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
 
     // + _Compare the values of player1Card and player2Card. The interesting thing will be how to compare cards. The result of the comparison will either add cards to one of the player's hands or discard them.
 
+    $roundWinner = 'tie';
+    
     if ($p1Card['value'] == $p2Card['value']){
         //It is a tie. Both cards are removed
+        $roundWinner = 'tie';
     } elseif ($p1Card['value'] > $p2Card['value']) {
         //Player one wins. Add both card to player1Hand
         array_push($player1Hand, $p1Card);
         array_push($player1Hand, $p2Card);
+        $roundWinner = 'Player 1';
+
     } else {
-        // Player 2 wins. Add both cards to layer2Hand
+        // Player 2 wins. Add both cards to player2Hand
         array_push($player2Hand, $p1Card);
         array_push($player2Hand, $p2Card);
+        $roundWinner = 'Player 1';
     }
 
     // count the round #, and cards in each player's hand
@@ -149,11 +156,11 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
 }
 
 // Determine the winner
-$winner = null;
+$gameWinner = null;
 if (count($player1Hand) == 0) {
-    $winner = 'Player 2';
+    $gameWinner = 'Player 2';
 } else{
-    $winner = 'Player 1';
+    $gameWinner = 'Player 1';
 }
 
 
