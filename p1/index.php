@@ -1,7 +1,7 @@
 <?php
 
-// + _Create an array for a deck of cards._
-// + _The "deck" array should hold 4 different arrays. One for each suit._
+// Create an array for a deck of cards.
+
 $deck = [
     0=> [
         'name'=>'2',
@@ -68,6 +68,201 @@ $deck = [
         'suit'=>'hearts',
         'value'=>14
     ] ,
+    13=> [
+        'name'=>'2',
+        'suit'=>'spades',
+        'value'=>2
+    ] ,
+    14 => [
+        'name'=>'3',
+        'suit'=>'spades',
+        'value'=>3
+    ] ,
+    15 => [
+        'name'=>'4',
+        'suit'=>'spades',
+        'value'=>4
+    ] ,
+    16 => [
+        'name'=>'5',
+        'suit'=>'spades',
+        'value'=>5
+    ] ,
+    17 => [
+        'name'=>'6',
+        'suit'=>'spades',
+        'value'=>6
+    ] ,
+    18=> [
+        'name'=>'7',
+        'suit'=>'spades',
+        'value'=>7
+    ] ,
+    19=> [
+        'name'=>'8',
+        'suit'=>'spades',
+        'value'=>8
+    ] ,
+    20=> [
+        'name'=>'9',
+        'suit'=>'spades',
+        'value'=>9
+    ] ,
+    21=> [
+        'name'=>'10',
+        'suit'=>'spades',
+        'value'=>10
+    ] ,
+    22=> [
+        'name'=>'J',
+        'suit'=>'spades',
+        'value'=>11
+    ] ,
+    23=> [
+        'name'=>'Q',
+        'suit'=>'spades',
+        'value'=>12
+    ] ,
+    24=> [
+        'name'=>'K',
+        'suit'=>'spades',
+        'value'=>13
+    ] ,
+    25=> [
+        'name'=>'A',
+        'suit'=>'spades',
+        'value'=>14
+    ] ,
+    26=> [
+        'name'=>'2',
+        'suit'=>'diamonds',
+        'value'=>2
+    ] ,
+    27 => [
+        'name'=>'3',
+        'suit'=>'diamonds',
+        'value'=>3
+    ] ,
+    28 => [
+        'name'=>'4',
+        'suit'=>'diamonds',
+        'value'=>4
+    ] ,
+    29 => [
+        'name'=>'5',
+        'suit'=>'diamonds',
+        'value'=>5
+    ] ,
+    30 => [
+        'name'=>'6',
+        'suit'=>'diamonds',
+        'value'=>6
+    ] ,
+    31=> [
+        'name'=>'7',
+        'suit'=>'diamonds',
+        'value'=>7
+    ] ,
+    32=> [
+        'name'=>'8',
+        'suit'=>'diamonds',
+        'value'=>8
+    ] ,
+    33=> [
+        'name'=>'9',
+        'suit'=>'diamonds',
+        'value'=>9
+    ] ,
+    34=> [
+        'name'=>'10',
+        'suit'=>'diamonds',
+        'value'=>10
+    ] ,
+    35=> [
+        'name'=>'J',
+        'suit'=>'diamonds',
+        'value'=>11
+    ] ,
+    36=> [
+        'name'=>'Q',
+        'suit'=>'diamonds',
+        'value'=>12
+    ] ,
+    37=> [
+        'name'=>'K',
+        'suit'=>'diamonds',
+        'value'=>13
+    ] ,
+    38=> [
+        'name'=>'A',
+        'suit'=>'diamonds',
+        'value'=>14
+    ] ,
+    39=> [
+        'name'=>'2',
+        'suit'=>'clubs',
+        'value'=>2
+    ] ,
+    40 => [
+        'name'=>'3',
+        'suit'=>'clubs',
+        'value'=>3
+    ] ,
+    41 => [
+        'name'=>'4',
+        'suit'=>'clubs',
+        'value'=>4
+    ] ,
+    42 => [
+        'name'=>'5',
+        'suit'=>'clubs',
+        'value'=>5
+    ] ,
+    43 => [
+        'name'=>'6',
+        'suit'=>'clubs',
+        'value'=>6
+    ] ,
+    44=> [
+        'name'=>'7',
+        'suit'=>'clubs',
+        'value'=>7
+    ] ,
+    45=> [
+        'name'=>'8',
+        'suit'=>'clubs',
+        'value'=>8
+    ] ,
+    46=> [
+        'name'=>'9',
+        'suit'=>'clubs',
+        'value'=>9
+    ] ,
+    47=> [
+        'name'=>'10',
+        'suit'=>'clubs',
+        'value'=>10
+    ] ,
+    48=> [
+        'name'=>'J',
+        'suit'=>'clubs',
+        'value'=>11
+    ] ,
+    49=> [
+        'name'=>'Q',
+        'suit'=>'clubs',
+        'value'=>12
+    ] ,
+    50=> [
+        'name'=>'K',
+        'suit'=>'clubs',
+        'value'=>13
+    ] ,
+    51=> [
+        'name'=>'A',
+        'suit'=>'clubs',
+        'value'=>14
+    ] ,
 ];
 
 
@@ -75,15 +270,10 @@ $deck = [
 
 shuffle($deck);
 
-// $cardName = $deck[0]['name'];
-// $cardSuit = $deck[0]['suit'];
-
 // Create an array for each player's hand
 
 $player1Hand = [];
 $player2Hand = [];
-
-
 
 // Create a variable to count the number of rounds played.
 
@@ -107,6 +297,8 @@ while (count($deck) > 0) {
 }
 
 // Create variable to keep track of how many cards in each player's hand. 
+// ?These two variable may not really be needed. I used them originally before I ended up creating arrays for cards remaining.
+
 $cardsRemainingP1 = count($player1Hand);
 $cardsRemainingP2 = count($player2Hand);
 
@@ -132,10 +324,12 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
     $roundWinner = 'tie';
     
     if ($p1Card['value'] == $p2Card['value']){
+        
         // It is a tie. Both cards are removed
 
         $roundWinner = 'tie';
     } elseif ($p1Card['value'] > $p2Card['value']) {
+        
         // Player one wins. Add both card to player1Hand
 
         array_push($player1Hand, $p1Card);
@@ -143,6 +337,7 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
         $roundWinner = 'Player 1';
 
     } else {
+        
         // Player 2 wins. Add both cards to player2Hand
 
         array_push($player2Hand, $p1Card);
@@ -167,6 +362,7 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
 }
 
 // Determine the game winner
+
 $gameWinner = null;
 if (count($player1Hand) == 0) {
     $gameWinner = 'Player 2';
@@ -174,14 +370,6 @@ if (count($player1Hand) == 0) {
     $gameWinner = 'Player 1';
 }
 
-
-
-
-// + _ There will also be a display of the result of each hand _
-// + _A new row in the table will be created for each round._
-// + _The table row will display player1Card, player2Card, result, and the number of cards in each players' hand._
-// + _There will be a global variable to count the number of rounds.
-// + _There will a display which tells the reader the winner.
  
 
 require 'index-view.php';
