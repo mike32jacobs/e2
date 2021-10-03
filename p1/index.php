@@ -2,7 +2,7 @@
 
 // Create an array for a deck of cards.
 
-$deck = [
+$deckHardCode = [
     0=> [
         'name'=>'2',
         'suit'=>'hearts',
@@ -264,6 +264,38 @@ $deck = [
     //     'value'=>14
     // ] ,
 ];
+
+//This is an attempt to create a deck differently
+// I could use these, and run a loop
+$cardNames = array('2','3','4','5','6','7','8','9','10','J','Q','K','A');
+$cardSuits =array('Hearts','Spades','Diamonds','Clubs');
+// $cardValues = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+
+$deck = array();
+
+for ($suit = 0; $suit < 4; $suit++) {
+    for ($value = 2; $value< 15; $value++){
+        array_push($deck, array($cardNames[$value - 2], $cardSuits[$suit], $value));
+    }
+}
+// shuffle($dynamicDeck);
+// var_dump($dynamicDeck);
+
+// $deck2= array (
+//     array(2, 'hearts', 2),
+//     array(3, 'hearts', 3),
+//     array(4, 'hearts', 4),
+//     array(5, 'hearts', 5),
+//     array(6, 'hearts', 6),
+//     array(7, 'hearts', 7),
+//     array(8, 'hearts', 8),
+//     array(9, 'hearts', 9),
+//     array(10, 'hearts', 10),
+//     array('J', 'hearts', 11),
+//     array('Q', 'hearts', 12),
+//     array('K', 'hearts', 13),
+//     array('A', 'hearts', 14),
+// );
 
 
 // Shuffle the "deck."
