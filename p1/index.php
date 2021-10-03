@@ -265,38 +265,19 @@ $deckHardCode = [
     // ] ,
 ];
 
-//This is an attempt to create a deck differently
-// I could use these, and run a loop
+//This is a different way to create a deck. IT is less than 10 lines compared to hardcoding, which took more than 250 lines. Both are still here until I have solved my memory problem.
+
 $cardNames = array('2','3','4','5','6','7','8','9','10','J','Q','K','A');
 $cardSuits =array('Hearts','Spades','Diamonds','Clubs');
-// $cardValues = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 
 $deck = array();
 
-for ($suit = 0; $suit < 4; $suit++) {
+// Note: This plays the game with only hearts. To include all of the suits in the deck, $suit < 1; should be $suit < 4;
+for ($suit = 0; $suit < 1; $suit++) {
     for ($value = 2; $value< 15; $value++){
         array_push($deck, array($cardNames[$value - 2], $cardSuits[$suit], $value));
     }
 }
-// shuffle($dynamicDeck);
-// var_dump($dynamicDeck);
-
-// $deck2= array (
-//     array(2, 'hearts', 2),
-//     array(3, 'hearts', 3),
-//     array(4, 'hearts', 4),
-//     array(5, 'hearts', 5),
-//     array(6, 'hearts', 6),
-//     array(7, 'hearts', 7),
-//     array(8, 'hearts', 8),
-//     array(9, 'hearts', 9),
-//     array(10, 'hearts', 10),
-//     array('J', 'hearts', 11),
-//     array('Q', 'hearts', 12),
-//     array('K', 'hearts', 13),
-//     array('A', 'hearts', 14),
-// );
-
 
 // Shuffle the "deck."
 
@@ -355,12 +336,14 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
 
     $roundWinner = 'tie';
     
-    if ($p1Card['value'] == $p2Card['value']){
+    if ($p1Card[2] == $p2Card[2]){
+    // if ($p1Card['value'] == $p2Card['value']){
         
         // It is a tie. Both cards are removed
 
         $roundWinner = 'tie';
-    } elseif ($p1Card['value'] > $p2Card['value']) {
+    } elseif ($p1Card[2] > $p2Card[2]) {
+    // } elseif ($p1Card['value'] > $p2Card['value']) {
         
         // Player one wins. Add both card to player1Hand
 

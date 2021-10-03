@@ -38,9 +38,12 @@ _Any instructions/notes in italics should be removed from the template before su
 *[Stack Overflow - conditional while loop in php](https://stackoverflow.com/questions/2435457/conditional-while-loop-in-php)*
 *[W3 schools - PHP if...else...elseif Statements](https://www.w3schools.com/php/php_if_else.asp)*
 *[PHP create HTML table with a while loop - tutorial 09.3](https://youtu.be/N_S7_wg87GU)*
+*[Allowed memory size of 33554432 bytes exhausted (tried to allocate 43148176 bytes) in php](https://stackoverflow.com/questions/415801/allowed-memory-size-of-33554432-bytes-exhausted-tried-to-allocate-43148176-byte)*
 
 
 ## Notes for instructor
 *any notes for me to refer to while grading; if none, omit this section*
 + _I had to make decisions about how to build a deck. Idecided that each card needed a name, a suit, and a value. It was a tedious setup, but it seemeed to work well. I started the project only using hearts. I thought that I could finish the game logic, and then add the cards after. Once I completed it, I went to add the cards and ran into a memory storage problem._
++ _Because I ran out of memory, I tried creating the deck dynamically. It turned out to be "better" than hard-coding 52 cards. It did not solve my memory problem, but it did make it easier for me to create future card games, because now I have the code for a deck._
+
 
