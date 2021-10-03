@@ -58,8 +58,10 @@
         while ($i < ($roundsPlayed - 1)){
             echo "<tr>" .PHP_EOL;
             echo "<td>" .($i + 1)."</td>".PHP_EOL;
-            echo "<td>" .$p1CardsPlayedData[$i]['name']." of ".$p1CardsPlayedData[$i]['suit']."</td>".PHP_EOL;
-            echo "<td>" .$p2CardsPlayedData[$i]['name']." of ".$p2CardsPlayedData[$i]['suit']."</td>".PHP_EOL;
+            // echo "<td>" .$p1CardsPlayedData[$i]['name']." of ".$p1CardsPlayedData[$i]['suit']."</td>".PHP_EOL;
+            // echo "<td>" .$p2CardsPlayedData[$i]['name']." of ".$p2CardsPlayedData[$i]['suit']."</td>".PHP_EOL;
+            echo "<td>" .$p1CardsPlayedData[$i][0]." of ".$p1CardsPlayedData[$i][1]."</td>".PHP_EOL;
+            echo "<td>" .$p2CardsPlayedData[$i][0]." of ".$p2CardsPlayedData[$i][1]."</td>".PHP_EOL;
             echo "<td>" .$roundWinnersData[$i]."</td>".PHP_EOL;
             echo "<td>" .$cardsRemainingP1Data[$i]."</td>".PHP_EOL;
             echo "<td>" .$cardsRemainingP2Data[$i]."</td>".PHP_EOL;
@@ -70,8 +72,9 @@
 
         <tr>
             <td><?php echo $roundsPlayed; ?></td>
-            <td><?php echo $p1Card['name']; ?> of <?php echo $p1Card['suit']; ?></td>
-            <td><?php echo $p2Card['name']; ?> of <?php echo $p2Card['suit']; ?></td>
+            <!-- On the next two lines of code, change 0 to 'name'and 1 to 'suit -->
+            <td><?php echo $p1Card[0]; ?> of <?php echo $p1Card[1]; ?></td>
+            <td><?php echo $p2Card[0]; ?> of <?php echo $p2Card[1]; ?></td>
             <td><?php echo $roundWinner; ?></td>
             <td><?php echo $cardsRemainingP1; ?></td>
             <td><?php echo $cardsRemainingP2; ?></td>
