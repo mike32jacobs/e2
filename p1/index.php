@@ -1,279 +1,15 @@
 <?php
 
-// Create an array for a deck of cards.
-
-$deckHardCode = [
-    0=> [
-        'name'=>'2',
-        'suit'=>'hearts',
-        'value'=>2
-    ] ,
-    1 => [
-        'name'=>'3',
-        'suit'=>'hearts',
-        'value'=>3
-    ] ,
-    2 => [
-        'name'=>'4',
-        'suit'=>'hearts',
-        'value'=>4
-    ] ,
-    3 => [
-        'name'=>'5',
-        'suit'=>'hearts',
-        'value'=>5
-    ] ,
-    4 => [
-        'name'=>'6',
-        'suit'=>'hearts',
-        'value'=>6
-    ] ,
-    5=> [
-        'name'=>'7',
-        'suit'=>'hearts',
-        'value'=>7
-    ] ,
-    6=> [
-        'name'=>'8',
-        'suit'=>'hearts',
-        'value'=>8
-    ] ,
-    7=> [
-        'name'=>'9',
-        'suit'=>'hearts',
-        'value'=>9
-    ] ,
-    8=> [
-        'name'=>'10',
-        'suit'=>'hearts',
-        'value'=>10
-    ] ,
-    9=> [
-        'name'=>'J',
-        'suit'=>'hearts',
-        'value'=>11
-    ] ,
-    10=> [
-        'name'=>'Q',
-        'suit'=>'hearts',
-        'value'=>12
-    ] ,
-    11=> [
-        'name'=>'K',
-        'suit'=>'hearts',
-        'value'=>13
-    ] ,
-    12=> [
-        'name'=>'A',
-        'suit'=>'hearts',
-        'value'=>14
-    ] ,
-    // 13=> [
-    //     'name'=>'2',
-    //     'suit'=>'spades',
-    //     'value'=>2
-    // ] ,
-    // 14 => [
-    //     'name'=>'3',
-    //     'suit'=>'spades',
-    //     'value'=>3
-    // ] ,
-    // 15 => [
-    //     'name'=>'4',
-    //     'suit'=>'spades',
-    //     'value'=>4
-    // ] ,
-    // 16 => [
-    //     'name'=>'5',
-    //     'suit'=>'spades',
-    //     'value'=>5
-    // ] ,
-    // 17 => [
-    //     'name'=>'6',
-    //     'suit'=>'spades',
-    //     'value'=>6
-    // ] ,
-    // 18=> [
-    //     'name'=>'7',
-    //     'suit'=>'spades',
-    //     'value'=>7
-    // ] ,
-    // 19=> [
-    //     'name'=>'8',
-    //     'suit'=>'spades',
-    //     'value'=>8
-    // ] ,
-    // 20=> [
-    //     'name'=>'9',
-    //     'suit'=>'spades',
-    //     'value'=>9
-    // ] ,
-    // 21=> [
-    //     'name'=>'10',
-    //     'suit'=>'spades',
-    //     'value'=>10
-    // ] ,
-    // 22=> [
-    //     'name'=>'J',
-    //     'suit'=>'spades',
-    //     'value'=>11
-    // ] ,
-    // 23=> [
-    //     'name'=>'Q',
-    //     'suit'=>'spades',
-    //     'value'=>12
-    // ] ,
-    // 24=> [
-    //     'name'=>'K',
-    //     'suit'=>'spades',
-    //     'value'=>13
-    // ] ,
-    // 25=> [
-    //     'name'=>'A',
-    //     'suit'=>'spades',
-    //     'value'=>14
-    // ] ,
-    // 26=> [
-    //     'name'=>'2',
-    //     'suit'=>'diamonds',
-    //     'value'=>2
-    // ] ,
-    // 27 => [
-    //     'name'=>'3',
-    //     'suit'=>'diamonds',
-    //     'value'=>3
-    // ] ,
-    // 28 => [
-    //     'name'=>'4',
-    //     'suit'=>'diamonds',
-    //     'value'=>4
-    // ] ,
-    // 29 => [
-    //     'name'=>'5',
-    //     'suit'=>'diamonds',
-    //     'value'=>5
-    // ] ,
-    // 30 => [
-    //     'name'=>'6',
-    //     'suit'=>'diamonds',
-    //     'value'=>6
-    // ] ,
-    // 31=> [
-    //     'name'=>'7',
-    //     'suit'=>'diamonds',
-    //     'value'=>7
-    // ] ,
-    // 32=> [
-    //     'name'=>'8',
-    //     'suit'=>'diamonds',
-    //     'value'=>8
-    // ] ,
-    // 33=> [
-    //     'name'=>'9',
-    //     'suit'=>'diamonds',
-    //     'value'=>9
-    // ] ,
-    // 34=> [
-    //     'name'=>'10',
-    //     'suit'=>'diamonds',
-    //     'value'=>10
-    // ] ,
-    // 35=> [
-    //     'name'=>'J',
-    //     'suit'=>'diamonds',
-    //     'value'=>11
-    // ] ,
-    // 36=> [
-    //     'name'=>'Q',
-    //     'suit'=>'diamonds',
-    //     'value'=>12
-    // ] ,
-    // 37=> [
-    //     'name'=>'K',
-    //     'suit'=>'diamonds',
-    //     'value'=>13
-    // ] ,
-    // 38=> [
-    //     'name'=>'A',
-    //     'suit'=>'diamonds',
-    //     'value'=>14
-    // ] ,
-    // 39=> [
-    //     'name'=>'2',
-    //     'suit'=>'clubs',
-    //     'value'=>2
-    // ] ,
-    // 40 => [
-    //     'name'=>'3',
-    //     'suit'=>'clubs',
-    //     'value'=>3
-    // ] ,
-    // 41 => [
-    //     'name'=>'4',
-    //     'suit'=>'clubs',
-    //     'value'=>4
-    // ] ,
-    // 42 => [
-    //     'name'=>'5',
-    //     'suit'=>'clubs',
-    //     'value'=>5
-    // ] ,
-    // 43 => [
-    //     'name'=>'6',
-    //     'suit'=>'clubs',
-    //     'value'=>6
-    // ] ,
-    // 44=> [
-    //     'name'=>'7',
-    //     'suit'=>'clubs',
-    //     'value'=>7
-    // ] ,
-    // 45=> [
-    //     'name'=>'8',
-    //     'suit'=>'clubs',
-    //     'value'=>8
-    // ] ,
-    // 46=> [
-    //     'name'=>'9',
-    //     'suit'=>'clubs',
-    //     'value'=>9
-    // ] ,
-    // 47=> [
-    //     'name'=>'10',
-    //     'suit'=>'clubs',
-    //     'value'=>10
-    // ] ,
-    // 48=> [
-    //     'name'=>'J',
-    //     'suit'=>'clubs',
-    //     'value'=>11
-    // ] ,
-    // 49=> [
-    //     'name'=>'Q',
-    //     'suit'=>'clubs',
-    //     'value'=>12
-    // ] ,
-    // 50=> [
-    //     'name'=>'K',
-    //     'suit'=>'clubs',
-    //     'value'=>13
-    // ] ,
-    // 51=> [
-    //     'name'=>'A',
-    //     'suit'=>'clubs',
-    //     'value'=>14
-    // ] ,
-];
-
-//This is a different way to create a deck. IT is less than 10 lines compared to hardcoding, which took more than 250 lines. Both are still here until I have solved my memory problem.
+// Dynamically create a deck of cards using a multidimensional array.
 
 $cardNames = array('2','3','4','5','6','7','8','9','10','J','Q','K','A');
 $cardSuits =array('Hearts','Spades','Diamonds','Clubs');
 
 $deck = array();
 
-// Note: This plays the game with only hearts. To include all of the suits in the deck, $suit < 1; should be $suit < 4;
-for ($suit = 0; $suit < 1; $suit++) {
+// Note: To use all four suits, $suit < 4. To use just one suit, use $suit < 1.This plays the game with only hearts.
+
+for ($suit = 0; $suit < 4; $suit++) {
     for ($value = 2; $value< 15; $value++){
         array_push($deck, array($cardNames[$value - 2], $cardSuits[$suit], $value));
     }
@@ -323,6 +59,11 @@ $roundWinnersData = [];
 $cardsRemainingP1Data = [];
 $cardsRemainingP2Data =[]; 
 
+// Create variable to keep track of what card indicates that a player needs to reshuffle
+$p1ShuffleCard = $player1Hand[$cardsRemainingP1 - 1];
+$p2ShuffleCard = $player2Hand[$cardsRemainingP2 - 1];
+
+
 // Play the game until one player has zero cards left.
 
 while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
@@ -332,18 +73,36 @@ while ((count($player1Hand) != 0) && (count($player2Hand)!= 0)) {
     $p1Card = array_shift($player1Hand);
     $p2Card = array_shift($player2Hand);
 
+    // Check to see if the card played indicates that a player should reshuffle for the next hand. Set a new card to indicate a player needs to reshuffle
+
+    if ($p1Card == $p1ShuffleCard){
+        shuffle($player1Hand);
+        
+        // If a player is down to the last card, the deck will be empty, so don't try to reshuffle. Check that the deck is not empty, Set a new card to indicate a player needs to reshuffle
+        
+        if (count($player1Hand)>0){
+            $p1ShuffleCard = $player1Hand[count($player1Hand) - 1];
+        }
+    }
+    if ($p2Card == $p2ShuffleCard){
+        shuffle($player2Hand);
+        if (count($player2Hand)>0){
+            $p2ShuffleCard = $player2Hand[count($player2Hand) - 1];
+        }
+
+    }
+
+
     // Compare the values of player1Card and player2Card. The interesting thing will be how to compare cards. The result of the comparison will either add cards to one of the player's hands or discard them.
 
     $roundWinner = 'tie';
     
     if ($p1Card[2] == $p2Card[2]){
-    // if ($p1Card['value'] == $p2Card['value']){
         
         // It is a tie. Both cards are removed
 
         $roundWinner = 'tie';
     } elseif ($p1Card[2] > $p2Card[2]) {
-    // } elseif ($p1Card['value'] > $p2Card['value']) {
         
         // Player one wins. Add both card to player1Hand
 
