@@ -34,6 +34,7 @@
         <li>For each round, a card is picked from the “top” of each player’s cards.</li>
         <li>Whoevers card is highest wins that round and keeps both cards.</li>
         <li>If the two cards are of the same value, it’s a tie and those cards are discarded.</li>
+        <li>When a player gets to the end of their deck, they reshuffle.</li>
         <li>The player who ends up with 0 cards is the loser.</li>
     </ul>
 
