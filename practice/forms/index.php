@@ -14,11 +14,8 @@
         <p>Mystery word: kiumppn</p>
         <p>Hint: Halloween’s favorite fruit</p>
 
-        <label for='answer'>Your guess 1:</label>
-        <input type='text' name='answer1' id='answer'>
-
-        <label for='answer'>Your guess 2:</label>
-        <input type='text' name='answer2' id='answer'>
+        <label for='answer'>Your guess:</label>
+        <input type='text' name='answer' id='answer'>
 
         <button type='submit'>Check answer</button>
     </form>
