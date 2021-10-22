@@ -12,7 +12,7 @@ class Person
 
 
     # Methods
-    public function __construct($firstName,$lastName,$age)
+    public function __construct(string $firstName, string $lastName, int $age)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
