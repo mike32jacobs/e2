@@ -4,11 +4,12 @@
 $deck = build_deck();
 shuffle($deck);
 
-// Create an array players in the game. This is hard coded, but it will eventually make it easier to let the user choose the number of players.
+// Create an array of  players in the game. This is hard coded, but it will eventually make it easier to let the user choose the number of players.
 
 $numberOfPlayers = 4;
 
 $players = array();
+$hands = array();
 
 for ($i = 0; $i<$numberOfPlayers; $i++)
 {
@@ -16,18 +17,36 @@ for ($i = 0; $i<$numberOfPlayers; $i++)
     $pNumber = strval($i+1);
     array_push($players,'p'.$pNumber);
 
+    // Create an array to hold each player's cards
+    $handName = 'p'.$pNumber.'Hand';
+    $$handName = [];
+
+    //add each hand to the Hands array
+    array_push($hands,$$handName);
+
 }
-var_dump($playerNames);
+var_dump($players);
+var_dump($hands);
+// var_dump($p2Hand);
+// var_dump($p3Hand);
+// var_dump($p4Hand);
 
-// Deal to each player in the game
+// Deal two cards to each player in the game
 
-foreach ($players as $player){
-    $topCard = array_shift($deck);
-    array_push($player1Hand, $topCard);
+foreach ($hands as $hand){
+    $drawCard = array_shift($deck);
+    array_push($hand, $drawCard);
+    $drawCard = array_shift($deck);
+    array_push($hand, $drawCard);
 
-    // The player gets two cards off of the deck
-    
 }
+
+    // $drawCard = array_shift($deck);
+    // array_push(hands[$p1Hand][0], $drawCard);
+
+// var_dump($hands);
+var_dump($p1Hand);
+
 
 // Deal to the dealer
 
