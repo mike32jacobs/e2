@@ -33,6 +33,7 @@ if (!isset($results) or isset($_GET['reset'])) {
     
     # Clear previous game data
     $outcome = null;
+    $winner = null;
     $_SESSION['results'] = null;
     
     # Build a new game

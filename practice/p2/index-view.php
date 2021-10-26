@@ -42,7 +42,7 @@
                 </td>
                 <?php } ?>
 
-                <td>?
+                <td><?php echo $dealerTotal; ?>
                 </td>
             </tr>
         </table>
@@ -70,12 +70,12 @@
         </table>
     </div>
 
-    <?php if (isset($outcome)) { ?>
+    <?php if (isset($winner)) { ?>
     <h2>Results</h2>
-    <?php if ($outcome == 'over') { ?>
-    You went over 21 and lost.
+    <?php if ($winner == 'player') { ?>
+    You Win. Your total was <?php echo $playerTotal; ?>
 
-    <?php } elseif ($outcome == 'blackjack') { ?>
+    <?php } elseif ($winner == 'dealer') { ?>
     Blackjack! You won
 
     <?php } else { ?>

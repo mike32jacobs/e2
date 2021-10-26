@@ -23,19 +23,23 @@ function build_deck()
 function calculate_total(array $hand)
 {
     $sum = 0;
+    $acesCount = 0;
 
-    // Iterate through cards, and sum the values
+    // Iterate through cards, and sum the values and count the aces
     for ($i=0; $i <count($hand); $i++) {
         $sum=$sum + $hand[$i][2];
+        if ($hand[$i][0]=='A'){
+            $acesCount++;
+        }
     }
 
     // If sum is greater than 21, check to see if there is an ace
     // in the player's hand. If there is, count the total using a 1 instead of an 11.
+    
     if ($sum>21) {
-        if (in_array('A', $hand)) {
-            //recalculate the sum using 1 instead of 11
-            $sum = $sum -10;
-        }
+        // Recalculate the sum using 1 instead of 11
+        // There is a bug in this code. It essentaally sets the value of each ace to 1. There may be a scenario when the player wants one ace to be worth 11 and another to be worth 1.
+        $sum = $sum - 10*$acesCount;
     }
 
     return $sum;
@@ -62,4 +66,17 @@ function check_total(int $total)
     } elseif ($total < 21) {
         return "under";
     }
+}
+
+function dealer_turn()
+{
+    global $dealerHand;
+    global $dealerTotal;
+
+    // Dealer must hit on anything less than 17
+    while ($dealerTotal< 17){
+        $dealerHand = deal_to_player($dealerHand, 1);
+        $dealerTotal = calculate_total($dealerHand);
+    }
+    // return $dealerTotal;
 }
