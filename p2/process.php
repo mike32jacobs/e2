@@ -1,16 +1,38 @@
 <?php
 
-session_start();
+include('index.php');
+
+// session_start();
+// $results = $_SESSION['results'];
+
+// $dealerHand = $results['dealerHand'];
+// $playerHand = $results['playerHand'];
+// $deck = $results['deck'];
+// $playerTotal = $results['playerTotal'];
+// $dealerTotal = $results['dealerTotal'];
+// if(!is_null($_SESSION['results'])){
+if(isset($_SESSION['results'])){
+    $results = $_SESSION['results'];
+    $dealerHand = $results['dealerHand'];
+    $playerHand = $results['playerHand'];
+    $deck = $results['deck'];
+    $playerTotal = $results['playerTotal'];
+    $dealerTotal = $results['dealerTotal'];
+
+    $_SESSION['results'] = null;
+} 
+
+
 
 $move = $_POST['move'];
 
-var_dump($_POST);
-$move = $_POST;
+var_dump($move);
 
 if ($move == 'new_game'){
 
-    // Start a game from scratch
-    echo 'start a new game';
+    // Start a game from scratch. Clear the session and go to index
+    $_SESSION['results'] = null;
+    header('Location: index.php');
     
 } elseif ($move == 'stay') {
     
@@ -21,39 +43,31 @@ if ($move == 'new_game'){
 } elseif ($move == 'hit'){
 
     // Give player another card
+    $playerHand = deal_to_player($playerHand,1);
+    var_dump($playerHand);
     
-    echo 'hit';
-
     // Calculate sum of cards
-    $p1Total =calculate_sum($p1Hand);
+    $playerTotal = calculate_total($playerHand);
+    var_dump($playerTotal);
 
-    // If sum is less than 21, give the player another turn
-    if ($p1Total < 21){
 
-        // Let player go again
-
-    } elseif ($p1Total == 21){
-
-        //Player wins
-        
-    } else($p1Total > 21){
-
-        //Player loses
-    }
 } elseif ($move == 'split') {
 
     //Check to see if player can split
-    if can_split($p1Hand){
+    if (can_split($p1Hand)){
         split($playerHand);
     }
 
 } elseif ($move == 'double_down') {
     
     //Check to see if player can double
-    if can_double_down($p1Hand){
+    if (can_double_down($p1Hand)){
         double_down($playerHand);
     }
 }
+
+
+
 
 
 function can_split($playerHand){
@@ -72,6 +86,7 @@ function split($playerHand){
     // Do this later
 
     echo 'Split: This function is yet to be created.';
+    echo $playerHand;
 }
 
 function can_double_down($playerHand){
@@ -96,6 +111,37 @@ function double_down($playerHand){
     echo 'Double Down: This function is yet to be created.';
 }
 
-$_SESSION['results'] = [
+function check_total(int $total){
+        // If sum is less than 21, give the player another turn
+        if ($total < 21){
+            echo "you have another turn";
+            // Let player go again
+            
+        } elseif ($total == 21){
+    
+            //Player wins
 
-]
+            echo "you win";
+            
+        } else {
+    
+            //Player loses
+            
+            echo "you lose";
+    
+        }
+}
+
+echo 'This is the player hand';
+var_dump($playerHand);
+
+$_SESSION['results'] = [
+    'deck' => $deck,
+    'playerHand'=> $playerHand,
+    'dealerHand'=> $dealerHand,
+    'playerTotal'=> $playerTotal,
+    'dealerTotal'=>$dealerTotal
+];
+
+// require 'index-view.php';
+require 'index.php';

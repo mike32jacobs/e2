@@ -1,57 +1,43 @@
 <?php
+session_start();
 
+echo (is_null($_SESSION['results']));
+// var_dump($_SESSION['results']);
+
+
+if(!is_null($_SESSION['results'])){
+// if(isset($_SESSION['results'])){
+    $results = $_SESSION['results'];
+    $dealerHand = $results['dealerHand'];
+    $playerHand = $results['playerHand'];
+    $deck = $results['deck'];
+    $playerTotal = $results['playerTotal'];
+    $dealerTotal = $results['dealerTotal'];
+
+    $_SESSION['results'] = null;
+} 
+// Build a new game
 
 $deck = build_deck();
 shuffle($deck);
 
-// Create an array of  players in the game. This is hard coded, but it will eventually make it easier to let the user choose the number of players.
+$playerHand =array();
 
-$numberOfPlayers = 4;
+$dealerHand = array();
 
-$players = array();
-$hands = array();
+// Deal two cards to player, and to the dealer
 
-for ($i = 0; $i<$numberOfPlayers; $i++)
-{
-    // Convert i to a string
-    $pNumber = strval($i+1);
-    array_push($players,'p'.$pNumber);
+$playerHand = deal_to_player($playerHand,2);
+$dealerHand = deal_to_player($dealerHand,2);
 
-    // Create an array to hold each player's cards
-    $handName = 'p'.$pNumber.'Hand';
-    $$handName = [];
+// var_dump($dealerTotal);
 
-    //add each hand to the Hands array
-    array_push($hands,$$handName);
+// Calculate sum of cards
 
-}
-var_dump($players);
-var_dump($hands);
-// var_dump($p2Hand);
-// var_dump($p3Hand);
-// var_dump($p4Hand);
+$playerTotal = calculate_total($playerHand);
+$dealerTotal = calculate_total($dealerHand);
 
-// Deal two cards to each player in the game
-
-foreach ($hands as $hand){
-    $drawCard = array_shift($deck);
-    array_push($hand, $drawCard);
-    $drawCard = array_shift($deck);
-    array_push($hand, $drawCard);
-
-}
-
-    // $drawCard = array_shift($deck);
-    // array_push(hands[$p1Hand][0], $drawCard);
-
-// var_dump($hands);
-var_dump($p1Hand);
-
-
-// Deal to the dealer
-
-
-// user definted function to build a deck
+// user defined function to build a deck
 
 function build_deck()
 {
@@ -66,18 +52,81 @@ function build_deck()
     foreach ($cardSuits as $suit) {
         for ($cardNumber = 0; $cardNumber< 13; $cardNumber++)
         {
-            array_push($deck,$cardNames[$cardNumber], $suit, $cardValues[$cardNumber] );
+            array_push($deck,array($cardNames[$cardNumber], $suit, $cardValues[$cardNumber]));
         }
     }
 
     return $deck;
 }
 
+// Function to find the sum of any hand
+function calculate_total(array $hand)
+    {
+        $sum = 0;
+
+        // Iterate through cards, and sum the values
+        for ($i=0; $i <count($hand); $i++){
+            $sum = $sum + $hand[$i][2];
+        }
+        echo 'Here comes the sum';
+        var_dump($sum);
+
+
+        // If sum is greater than 21, check to see if there is an ace in the player's hand. If there is, count the total using a 1 instead of an 11.
+
+        if($sum>21){
+            if (in_array('A',$hand)){
+                
+                //recalculate the sum using 1 instead of 11
+                $sum= $sum -10;
+                
+            }
+        }
+        return $sum;
+    }
+
+
 // User defined funtion to deal to a player. This may not be needed in a one player game, but it will be needed if there are multiple players, or if a player splits and has two hands.
 
-function deal_to_player($player){
+function deal_to_player(array $player, int $numCards){
+    global $deck;
+    // global $player;
+    
+    for ($i= 0; $i < $numCards; $i++){
+        $drawCard = array_shift($deck);
+        array_push($player, $drawCard);
+    }
 
-
+    return $player;
 }
+
+// function new_game(){
+//     $deck = build_deck();
+//     shuffle($deck);
+
+//     $playerHand =array();
+
+//     $dealerHand = array();
+
+//     // Deal two cards to player, and to the dealer
+
+//     $playerHand = deal_to_player($playerHand,2);
+//     $dealerHand = deal_to_player($dealerHand,2);
+
+//     // var_dump($dealerTotal);
+
+//     // Calculate sum of cards
+
+//     $playerTotal = calculate_total($playerHand);
+//     $dealerTotal = calculate_total($dealerHand);
+// }
+
+$_SESSION['results'] = [
+    'deck' => $deck,
+    'playerHand'=> $playerHand,
+    'dealerHand'=> $dealerHand,
+    'playerTotal'=>$playerTotal,
+    'dealerTotal'=>$dealerTotal,
+];
 
 require 'index-view.php';
