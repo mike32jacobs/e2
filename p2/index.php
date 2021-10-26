@@ -1,12 +1,28 @@
 <?php
 session_start();
 
-echo (is_null($_SESSION['results']));
-// var_dump($_SESSION['results']);
+if(is_null($_SESSION['results'])){
+    // Build a new game
 
+    $deck = build_deck();
+    shuffle($deck);
 
-if(!is_null($_SESSION['results'])){
-// if(isset($_SESSION['results'])){
+    $playerHand =array();
+
+    $dealerHand = array();
+
+    // Deal two cards to player, and to the dealer
+
+    $playerHand = deal_to_player($playerHand,2);
+    $dealerHand = deal_to_player($dealerHand,2);
+
+    // var_dump($dealerTotal);
+
+    // Calculate sum of cards
+
+    $playerTotal = calculate_total($playerHand);
+    $dealerTotal = calculate_total($dealerHand);
+}else {
     $results = $_SESSION['results'];
     $dealerHand = $results['dealerHand'];
     $playerHand = $results['playerHand'];
@@ -15,27 +31,14 @@ if(!is_null($_SESSION['results'])){
     $dealerTotal = $results['dealerTotal'];
 
     $_SESSION['results'] = null;
-} 
-// Build a new game
+}
 
-$deck = build_deck();
-shuffle($deck);
 
-$playerHand =array();
 
-$dealerHand = array();
+// if(!is_null($_SESSION['results'])){
+// if(isset($_SESSION['results'])){
 
-// Deal two cards to player, and to the dealer
 
-$playerHand = deal_to_player($playerHand,2);
-$dealerHand = deal_to_player($dealerHand,2);
-
-// var_dump($dealerTotal);
-
-// Calculate sum of cards
-
-$playerTotal = calculate_total($playerHand);
-$dealerTotal = calculate_total($dealerHand);
 
 // user defined function to build a deck
 
@@ -47,7 +50,7 @@ function build_deck()
     $cardValues = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11);
     $cardSuits =array('Hearts','Spades','Diamonds','Clubs');
 
-    $deck = array();
+    $newDeck = array();
 
     foreach ($cardSuits as $suit) {
         for ($cardNumber = 0; $cardNumber< 13; $cardNumber++)
@@ -56,7 +59,7 @@ function build_deck()
         }
     }
 
-    return $deck;
+    return $newDeck;
 }
 
 // Function to find the sum of any hand

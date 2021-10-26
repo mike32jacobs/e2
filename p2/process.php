@@ -2,7 +2,7 @@
 
 include('index.php');
 
-// session_start();
+session_start();
 // $results = $_SESSION['results'];
 
 // $dealerHand = $results['dealerHand'];
