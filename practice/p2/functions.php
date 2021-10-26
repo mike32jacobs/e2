@@ -68,6 +68,28 @@ function check_total(int $total)
     }
 }
 
+function check_winner()
+{
+    global $dealerTotal;
+    global $playerTotal;
+    
+    if ($dealerTotal > 21){
+        // Dealer Busts. 
+        return 'player';
+    }elseif (($playerTotal>$dealerTotal) and ($playerTotal<22)){
+        // Nobody busts. player beats dealer
+        return 'player';
+    }elseif (($dealerTotal>$playerTotal) and ($dealerTotal<22)){
+        // Nobody busts. dealer beats player
+        return 'player';
+    }elseif (($playerTotal==$dealerTotal)and($playerTotal<22)){
+        // nobody busts and the score is tied. Player gets the win.
+        return 'player';
+    } else{
+        return 'dealer';
+    }
+}
+
 function dealer_turn()
 {
     global $dealerHand;

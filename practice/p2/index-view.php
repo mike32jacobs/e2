@@ -76,7 +76,7 @@
     You Win. Your total was <?php echo $playerTotal; ?>
 
     <?php } elseif ($winner == 'dealer') { ?>
-    Blackjack! You won
+    Sorry, you lost.
 
     <?php } else { ?>
     You’re under.
@@ -96,5 +96,9 @@
     <a href='index.php?reset=true'>Play again</a>
     <?php } ?>
 </body>
+<h3> Test output </h3>
+<?php echo $playerTotal; ?>
+<?php echo $dealerTotal; ?>
+<?php echo $winner; ?>
 
 </html>

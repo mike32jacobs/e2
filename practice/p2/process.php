@@ -21,18 +21,11 @@ if ($move == 'hit') {
 
 // Check the player total. If they "stay and have a total of less than 21, then it is the dealer's turn.
 
-if ($playerTotal == 21){
-    $winner = 'player';
-} elseif ($playerTotal < 21){   
+if ($playerTotal < 21){   
     dealer_turn();
-    if ($playerTotal>$dealerTotal){
-        $winner = 'player';
-    }elseif ($playerTotal==$dealerTotal){
-        $winner = 'player';
-    } else{
-        $winner = 'dealer';
-    }
 }
+
+$winner= check_winner();
 var_dump($winner);
 
 $_SESSION['results'] = [

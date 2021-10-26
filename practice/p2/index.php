@@ -10,6 +10,7 @@ if (isset($_SESSION['results'])) {
     $playerHand = $results['playerHand'];
     $playerTotal = $results['playerTotal'];
     $dealerTotal = $results['dealerTotal'];
+    $winner = $results['winner'];
 
     // This null coalescing operator came from Professor Buck. Thanks for the help
 
@@ -17,6 +18,7 @@ if (isset($_SESSION['results'])) {
 
     # Here's where we check to see if they were over/under/blackjack
     $outcome = check_total($playerTotal);
+    
 
 }
 
