@@ -73,17 +73,18 @@
     <?php if (isset($winner)) { ?>
     <h2>Results</h2>
     <?php if ($winner == 'player') { ?>
-    You Win. Your total was <?php echo $playerTotal; ?>
+    <p>You Win. Your total was <?php echo $playerTotal; ?></p>
+    <p>The dealer's total was <?php echo $dealerTotal; ?></p>
+
 
     <?php } elseif ($winner == 'dealer') { ?>
-    Sorry, you lost.
+    Sorry, you lost. Your total was <?php echo $playerTotal; ?></p>
+    <p>The dealer's total was <?php echo $dealerTotal; ?></p>
 
-    <?php } else { ?>
-    You’re under.
     <?php } ?>
     <?php }?>
 
-    <?php if (!isset($outcome) or ($outcome == 'under' and $move != 'stay')) { ?>
+    <?php if (!isset($winner)) { ?>
     <form method='POST' action='process.php'>
         <label for="move">What would you like to do?</label>
 
@@ -96,9 +97,5 @@
     <a href='index.php?reset=true'>Play again</a>
     <?php } ?>
 </body>
-<h3> Test output </h3>
-<?php echo $playerTotal; ?>
-<?php echo $dealerTotal; ?>
-<?php echo $winner; ?>
 
 </html>

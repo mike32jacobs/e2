@@ -81,11 +81,12 @@ function check_winner()
         return 'player';
     }elseif (($dealerTotal>$playerTotal) and ($dealerTotal<22)){
         // Nobody busts. dealer beats player
-        return 'player';
+        return 'dealer';
     }elseif (($playerTotal==$dealerTotal)and($playerTotal<22)){
         // nobody busts and the score is tied. Player gets the win.
         return 'player';
     } else{
+        // The only option left is the player busted before the dealer went
         return 'dealer';
     }
 }
