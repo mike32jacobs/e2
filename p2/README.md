@@ -1,5 +1,3 @@
-*Any instructions/notes in italics should be removed from the template before submitting* 
-
 # Project 2
 + By: *Michael Jacobs*
 + Production URL: <http://e2p2.yourdomain.com>
