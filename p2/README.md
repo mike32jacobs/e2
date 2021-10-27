@@ -12,5 +12,6 @@
 
 
 ## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
-+ _I decided to try blackjack because it is a difficult game, and I was looking to challenge myself._
++ _I decided to try blackjack because it is a difficult game, and I was looking to challenge myself. As you know from looking at the early version, I was having a lot of issues._
++ _I think the biggest help was putting all of my functions in a separate file. This helped me clear my thinking and the code._
++ _My initial thought was to build a player class. I know that it was not suggested, but I was hoping to eventually have multiple players play against the dealer. I ended up not using the player class._

@@ -1,78 +1,80 @@
 <?php
-include 'process.php';
-
 session_start();
-// Build a new game
 
-$deck = build_deck();
-shuffle($deck);
+require 'functions.php';
 
-$playerHand =array();
+if (isset($_SESSION['results'])) {
+    $results = $_SESSION['results'];
+    $deck = $results['deck'];
+    $dealerHand = $results['dealerHand'];
+    $playerHand = $results['playerHand'];
+    $playerTotal = $results['playerTotal'];
+    $dealerTotal = $results['dealerTotal'];
+    $winner = $results['winner'];
 
-$dealerHand = array();
+    // This null coalescing operator came from Professor Buck. Thanks for the help
 
-// Deal two cards to player, and to the dealer
-
-$playerHand = deal_to_player($playerHand,2);
-$dealerHand = deal_to_player($dealerHand,2);
-
-// var_dump($dealerTotal);
-
-// Calculate sum of cards
-
-$playerTotal = calculate_total($playerHand);
-$dealerTotal = calculate_total($dealerHand);
-// if(is_null($_SESSION['results'])){
+    $move = $results['move'] ?? null;
     
-// }else {
-//     $results = $_SESSION['results'];
-//     $dealerHand = $results['dealerHand'];
-//     $playerHand = $results['playerHand'];
-//     $deck = $results['deck'];
-//     $playerTotal = $results['playerTotal'];
-//     $dealerTotal = $results['dealerTotal'];
 
-//     $_SESSION['results'] = null;
-// }
+}
 
+# Display a new game if there are no results to work with
+# (e.g. we're coming to the page for the first time)
+#
+# Or...
+#
+# If the user is coming to this page from the "Play again" link.
+# That link appends a `reset` query string like so:
+# <a href='index.php?reset=true'>Play again</a>
+# So we look for that `rese`t value in the $_GET superglobal
+// This was super helpful. Thank you for the code
 
+if (!isset($results) or isset($_GET['reset'])) {
+    
+    # Clear previous game data
+    $winner = null;
+    $_SESSION['results'] = null;
+    
+    # Build a new game
+    $deck = build_deck();
+    shuffle($deck);
 
-// if(!is_null($_SESSION['results'])){
-// if(isset($_SESSION['results'])){
+    $playerHand = [];
+    $dealerHand = [];
 
+    # Deal two cards to player, and to the dealer
+    $playerHand = deal_to_player($playerHand, 2);
+    $dealerHand = deal_to_player($dealerHand, 2);
 
+    # Calculate sum of cards
+    $playerTotal = calculate_total($playerHand);
+    $dealerTotal = calculate_total($dealerHand);
 
-// user defined function to build a deck
+    # Check to see if either player or dealer were dealt blackjack
+    if (($playerTotal==21) and ($dealerTotal==21)){
+        
+        # Player and dealer were both dealt blackjack. Player wins
+        $winner = 'player';
+    } elseif (($dealerTotal==21) and !($playerTotal==21)){
+        
+        # Dealer was dealt blackjack
+        $winner = 'dealer';
+    } elseif (!($dealerTotal==21) and ($playerTotal==21)){
+        
+        # Player was dealt blackjack
+        $winner = 'player';
+    }
 
-
-
-// function new_game(){
-//     $deck = build_deck();
-//     shuffle($deck);
-
-//     $playerHand =array();
-
-//     $dealerHand = array();
-
-//     // Deal two cards to player, and to the dealer
-
-//     $playerHand = deal_to_player($playerHand,2);
-//     $dealerHand = deal_to_player($dealerHand,2);
-
-//     // var_dump($dealerTotal);
-
-//     // Calculate sum of cards
-
-//     $playerTotal = calculate_total($playerHand);
-//     $dealerTotal = calculate_total($dealerHand);
-// }
-
-$_SESSION['results'] = [
-    'deck' => $deck,
-    'playerHand'=> $playerHand,
-    'dealerHand'=> $dealerHand,
-    'playerTotal'=>$playerTotal,
-    'dealerTotal'=>$dealerTotal,
-];
+    # Persist the results for process.php
+    $_SESSION['results'] = [
+        'deck' => $deck,
+        'playerHand' => $playerHand,
+        'dealerHand' => $dealerHand,
+        'playerTotal' => $playerTotal,
+        'dealerTotal' => $dealerTotal,
+        'winner' => $winner
+    ];
+}
 
 require 'index-view.php';

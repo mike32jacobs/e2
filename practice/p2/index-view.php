@@ -26,6 +26,8 @@
 </head>
 
 <body>
+    <h1>Project 2: Blackjack - By Michael Jacobs</h1>
+
     <div>
         <h2>Dealer's Hand</h2>
         <table>
