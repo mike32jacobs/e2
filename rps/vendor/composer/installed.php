@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '51ebe6a70ba5f1300e05672e1c49629efca2d83a',
+        'reference' => 'a67ce88e0ddd809308a55cd196f6d11c92a4a766',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '51ebe6a70ba5f1300e05672e1c49629efca2d83a',
+            'reference' => 'a67ce88e0ddd809308a55cd196f6d11c92a4a766',
             'dev_requirement' => false,
         ),
         'susanbuck/rock-paper-scissors' => array(
