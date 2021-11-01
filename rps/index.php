@@ -1,17 +1,24 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
+require 'MyGame.php';
 
 use RPS\Game;
 use App\Debug;
 
-$game = new Game(true,4);
-$game->play('scissors');
-$results = $game->getResults();
+// $game = new Game(true,4);
+// $game->play('scissors');
+// $results = $game->getResults();
 
-// var_dump($game);
+// // var_dump($game);
+// var_dump($results);
+// var_dump($results[2]['outcome']);
+
+$flip = new MyGame(true,4);
+$flip->play('heads');
+$results = $flip->getResults();
+
+var_dump($flip);
 var_dump($results);
-var_dump($results[2]['outcome']);
-
 
 // var_dump($results['outcome']);
 // var_dump($game->getResults());
