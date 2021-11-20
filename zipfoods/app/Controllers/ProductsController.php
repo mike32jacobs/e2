@@ -41,6 +41,15 @@ class ProductsController extends Controller
 
     public function saveReview()
     {
+        $this->app->validate([
+            'sku' => 'required',
+            'name' => 'required',
+            'review' => 'required|minLength:200' 
+        ]);
+        
+        # If the above validation fails, the user is redirected from whence they came (/product)
+        #None of the following code will be executed
+
         $sku = $this->app->input('sku');
         $name = $this->app->input('name');
         $review = $this->app->input('review');
