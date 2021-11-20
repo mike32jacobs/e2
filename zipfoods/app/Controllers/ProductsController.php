@@ -31,7 +31,22 @@ class ProductsController extends Controller
             return $this->app->view('products/missing');
         }
 
-        return $this->app->view('products/show',['product'=>$product]);
+        $reviewSaved = $this->app->old('reviewSaved');
 
+        return $this->app->view('products/show',[
+            'product'=>$product,
+            'reviewSaved'=> $reviewSaved
+        ]);
+    }
+
+    public function saveReview()
+    {
+        $sku = $this->app->input('sku');
+        $name = $this->app->input('name');
+        $review = $this->app->input('review');
+
+        #Todo: Persist review to the database
+
+        return $this->app->redirect('/product?sku=' . $sku,['reviewSaved'=>true]);
     }
 }
