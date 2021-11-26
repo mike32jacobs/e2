@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Commands;
+use App\Products;
+use Faker\Factory;
 
 class AppCommand extends Command
 {
@@ -9,6 +11,13 @@ class AppCommand extends Command
         dump('It works! You invoked your first command.');
     }
 
+    public function fresh() 
+    {
+        $this->migrate();
+        $this->seedProducts();
+        $this->seedReviews();
+    }
+    
     public function migrate()
     {
         // ... Do stuff later
@@ -31,6 +40,51 @@ class AppCommand extends Command
         ]);
 
         dump('Migration complete; check the database for your new tables.');
+    }
+
+
+    public function seedProducts()
+    {
+        $products = new Products($this->app->path('database/products.json'));
+
+        foreach ($products->getAll() as $product) {
+
+            # We’re not tracking `categories`
+            unset($product['categories']);
+
+            # Don’t need ID - that will get automatically added
+            unset($product['id']);
+
+            # Convert perishable boolean to int
+            $product['perishable'] = $product['perishable'] ? 1 : 0;
+
+            # Insert product
+            $this->app->db()->insert('products', $product);
+        }
+
+        dump('Products table has been seeded.');
+    }
+
+
+    public function seedReviews() {
+        # Instantiate a new instance of the Faker\Factory class
+        $faker = Factory::create();
+    
+        # Use a loop to create 5 reviews
+        for ($i = 0; $i < 5; $i++) {
+    
+            # Set up a review
+            $review = [
+                'name' => $faker->name,
+                'review' => $faker->sentences(3, true),
+                'product_id' => ($i % 2 == 0) ? 1 : 2, # Alternate between products 1 and 2
+            ];
+    
+            # Insert the review
+            $this->app->db()->insert('reviews', $review);
+        }
+        dump('Reviews table has been seeded.');
+
     }
 
 }
