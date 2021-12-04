@@ -54,11 +54,11 @@ class ProductsController extends Controller
 
         $this->app->validate([
             'name' => 'required',
-            'sku' => 'required',
+            'sku' => 'required|alphaNumericDash',
             'description' => 'required',
-            'price' => 'required', 
-            'available' => 'required',
-            'weight' => 'required',
+            'price' => 'required|numeric', 
+            'available' => 'required|numeric',
+            'weight' => 'required|numeric',
             'perishable' => 'required',
         ]);
         
@@ -75,6 +75,8 @@ class ProductsController extends Controller
 
         // dd($name, $sku, $description, $price, $availability,$weight, $perishability);
         #Todo: Persist product to the database
+
+// This is a place where I could have used inputAll() function.  See e2 Week14, Part I video (13:30)
 
         $this->app->db()->insert('products', [
             'name' => $name,
