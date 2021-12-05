@@ -7,7 +7,7 @@
 @section('content')
 
     @if ($reviewSaved)
-        <div class='alert alert-success'>Thank you, your review was submitted</div>
+        <div test='review-confirmation' class='alert alert-success'>Thank you, your review was submitted</div>
     @endif
 
     @if ($productAdded)
@@ -37,16 +37,18 @@
 
         <div class='form-group'>
             <label for='name'>Name</label>
-            <input type='text' class='form-control' name='name' id='name' value='{{ $app->old('name') }}'>
+            <input test='reviewer-name-input' type='text' class='form-control' name='name' id='name'
+                value='{{ $app->old('name') }}'>
         </div>
 
         <div class='form-group'>
             <label for='review'>Review</label>
-            <textarea name='review' id='review' class='form-control'>{{ $app->old('review') }}</textarea>
+            <textarea test='review-textarea' name='review' id='review'
+                class='form-control'>{{ $app->old('review') }}</textarea>
             (Min: 200 characters)
         </div>
 
-        <button type='submit' class='btn btn-primary'>Submit Review</button>
+        <button test='review-submit-button' type='submit' class='btn btn-primary'>Submit Review</button>
     </form>
 
     @if ($app->errorsExist())
@@ -60,11 +62,11 @@
     <a href='/products'>&larr; Return to all products</a>
 
     @foreach ($reviews as $review)
-        <div id='product-review'>
-            <h2>Reviewer: {{ $review['name'] }}</h2>
+        <div class='review' id='product-review'>
+            <h2 test='review-name' class='review-name'>Reviewer: {{ $review['name'] }}</h2>
             <h2>Review : </h2>
 
-            <p class='product-description'>
+            <p test='review-content' class='review-content'>
                 {{ $review['review'] }}
             </p>
         </div>
