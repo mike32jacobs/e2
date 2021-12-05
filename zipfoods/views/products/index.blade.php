@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2>All Products</h2>
+    <h2 test='all-products'>All Products</h2>
 
     <div id='product-index'>
         @foreach ($products as $product)

@@ -43,4 +43,23 @@ class ProductPageCest
         $I->see($review,'[test=review-content]');
 
     }
+
+    public function validateReviewFields(AcceptanceTester $I)
+    {
+        $I->amOnPage('/product?sku=driscolls-strawberries');
+
+        $name =null;
+        $I->fillField('[test=reviewer-name-input]', $name);
+
+ 
+
+        $I->click('[test=review-submit-button]');
+
+        $I->seeElement('[test=errors]');
+        $errorMessage = 'The value for name can not be blank';
+
+        // Confirm we see the error message on the page.
+        $I->see($errorMessage,'[test=errors]');
+
+    }
 }
