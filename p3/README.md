@@ -13,7 +13,7 @@
 *[Blackjack strategy 101: How do you double down in blackjack?](https://blog.betway.com/casino/blackjack-strategy-101-how-do-you-double-down-in-blackjack/#:~:text=The%20double%20down%20lets%20you,re%20playing%20before%20you%20start.)*
 
 ## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
+*I decided to try a different game. I chose this because of my experiences with P2. I wanted to create a minimum acceptable project. Once I have that complete, I can work on changing it. This counting game involves fewer scenarios. *
 
 ## Codeception testing output
 ```
