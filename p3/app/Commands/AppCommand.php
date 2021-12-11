@@ -22,7 +22,8 @@ class AppCommand extends Command
         $this->app->db()->createTable('choices', [
             'player_id' => 'int',
             'game_id' => 'int',
-            'choice' => 'int',
+            'total_before_choice',
+            'choice' => 'int', //thi will be an add 1 or add 2
         ]);
     }
 }

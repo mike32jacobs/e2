@@ -37,13 +37,13 @@ class AppController extends Controller
 
         // dump($number, $count);
 
-        //By default, the game is played to 21, with an ability to advance by 1 or 2. 
+        //By default, the game is played to 21, with an ability to advance by 1 or 2. .
 
         if ($number == null){
-            $number=25;
+            $number=21;
         }
         if ($count == null){
-            $count=4;
+            $count=2;
         }
 
 
