@@ -11,13 +11,6 @@
     <p>The goal of the game is to be the person to advance the count to 21. Each time it is your turn, you can advance the
         count by 1 or 2. You will take turns with the Nerd.</p>
 
-    <form method='POST' action='/process'>
-
-        <input type='radio' name="choice" value=1 id='count1'><label for='count1'>Add 1 to Count</label>
-        <input type='radio' name="choice" value=2 id='count2'><label for='count2'>Add 2 to Count</label>
-
-        <button type='submit'>Advance Count!</button>
-    </form>
     <h3>Start a new game</h3>
     <form method='POST' action='/new'>
         <label for="winning-number">Choose the winning number: It must be greater than 10</label>
@@ -28,13 +21,13 @@
         <button type='submit'>start a new game!</button>
     </form>
 
-    <div>
+    {{-- <div>
         <p> This is a test to see if I can return data to this page.</p>
         <ol>
-            {{-- <li>{{ $choice }}</li> --}}
+            <li>{{ $choice }}</li>
             <li>{{ $total }}</li>
             <li>{{ $winning_score }}</li>
             <li>{{ $max_count }}</li>
-    </div>
+    </div> --}}
 
 @endsection
