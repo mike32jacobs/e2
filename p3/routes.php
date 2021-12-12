@@ -9,5 +9,5 @@ return [
     '/play'=> ['AppController', 'play'],
     '/new'=> ['AppController', 'initialize'],
     '/history'=>['AppController', 'history'],
-    '/round'=>['AppController', 'round'],
+    '/game'=>['AppController', 'game'],
 ];

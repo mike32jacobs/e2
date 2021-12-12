@@ -72,7 +72,7 @@ class AppCommand extends Command
                 'winner'=> 1, #Player 1 will win both seeded games
                 'player1_id'=>($j % 2 == 0) ? 1 : 2, # Alternate between player 1 and 2
                 'player2_id'=>($j % 2 == 0) ? 2 : 1, # Alternate between player 2 and 1,
-                'timestamp'=> $faker->dateTimeBetween('-10d days','now')->format('Y-m-d H:m:s')
+                'timestamp'=> $faker->dateTimeBetween('-'.$j.' days','-'.$j.' days')->format('Y-m-d H:m:s')
             ]);
         } 
         dump('Games table has been seeded.');

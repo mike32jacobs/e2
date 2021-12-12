@@ -21,16 +21,42 @@ class AppController extends Controller
 
     public function history()
     {
-        return $this->app->view('history');
+        $games =$this->app->db()->all('games');
+        dump($games);
+        
+        return $this->app->view('history',['games'=>$games]);
     }
 
-    public function round()
+    public function game()
     {
-        return $this->app->view('round');
+        $id = $this->app->param('id');
+
+        $game = $this->app->db()->findById('games', $id);
+        
+        dump($game);
+
+         
+        // Find all of the choices with the current game
+        //Create a custom command
+        $sql ='SELECT * FROM choices WHERE game_id ='.$id;
+        $executed = $this->app->db()->run($sql);
+
+        # A PDO method is used to extract the results
+        $choices = $executed->fetchAll();
+        dump($choices);
+        
+        
+        return $this->app->view('game', ['game'=>$game, 'choices'=>$choices]);
     }
 
     public function initialize()
     {
+        // Validate user input
+        $this->app->validate([
+            'winning-number'=> 'min:11',
+            'max-count'=>'max:5'
+        ]);
+        
         // Get user input from form
         $number = $this->app->input('winning-number');
         $count = $this->app->input('max-count');
@@ -57,42 +83,77 @@ class AppController extends Controller
         // dump($this->max_count);
         
         //TODO: persist these results to database. Then let the play continue.
-        //TODO: Change the value of the global variables
 
-        // dump("you are inside of the initialize function");
-
-        // return $this->app->view('play');
-
-        return $this->app->redirect('play',[
-            'total'=>$this->total,
-            'winning_score'=>$this->winning_score,
-            'max_count'=>$this->max_count
+        $this->app->db()->insert('games',[
+            'winning_score' => $this->winning_score,
+            'max_count'=>$this->max_count,
+            // 'winner'=> 1, #We do not have a winner yet
+            'player1_id'=> 1,
+            'player2_id'=> 2,
+            'timestamp'=> date('Y-m-d H:m:s')
         ]);
+
+        // Find the id of the newly initialized game.
+
+        //Create a custom command
+        $sql ='SELECT COUNT(*) FROM games';
+        $executed = $this->app->db()->run($sql);
+
+        # A PDO method is used to extract the results
+        $id = $executed->fetchAll();
+        $id =$id[0]['COUNT(*)'];
+
+        $game = $this->app->db()->findById('games', $id);
+    
+        
+        return $this->app->view('play', ['game'=>$game,'total'=>$this->total], );
 
     }
     public function process()
     {
+        // Validate user input
+        $this->app->validate([
+            'choice'=> 'required',
+        ]);
         
         dump("you are inside of the process function");
-        dump('this->total', $this->total);
+        // Get user input from form
+        $choice = (int)$this->app->input('choice');
+        dump('$choice', $choice);
+        $game_id = (int)$this->app->input('game_id');
+        dump('$game_id', $game_id);
+        $total = (int)$this->app->input('total');
+        dump('$total', $total);
 
-        dump($this->winning_score);
-        dump($this->max_count);
+        // use the game_id to query the database
+        $game = $this->app->db()->findById('games', $game_id);
 
-        $advance_count =(int)$this->app->input('choice');
-        $new_total = $advance_count + $this->total;
+        // Write the choice to the database, then update the total and turn
+        $this->app->db()->insert('choices',[
+            'player_id' => 1,
+            'game_id'=>$game_id,
+            'total_before_choice'=> $total,
+            'choice'=> $choice,
+        ]);
+
+        $total = $choice + $total;
         
-        dump('$advance_count', $advance_count);
-
-        dump('$new_total', $new_total);
-        $this->total = $new_total;
-        dump('this->total', $this->total);
+    
+        //Check to see if the total is >= winning_score
+        if($total >= $game['winning_score']){
+            //Game is over. The current player is the winner
+            //Create a custom command
+            $sql ='UPDATE games SET winner=2 WHERE id ='.$game_id.';';
+            $this->app->db()->run($sql);
+        }
         
-        return $this->app->view('play');
+        return $this->app->view('play', ['game'=>$game,'total'=>$total]);
     }
 
     public function play()
     {
+       
+       
         $total=$this->app->old('total');
         $winning_score=$this->app->old('winning_score');
         $max_count=$this->app->old('max_count');
@@ -107,7 +168,7 @@ class AppController extends Controller
         dump($this->total);
         dump($this->winning_score);
         dump($this->max_count);
-        // return $this->app->view('play');
+        return $this->app->view('play');
     }
 
     public function nerd_turn()
