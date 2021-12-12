@@ -21,6 +21,14 @@
         <button type='submit'>start a new game!</button>
     </form>
 
+    @if ($app->errorsExist())
+        <ul class='error alert alert-danger'>
+            @foreach ($app->errors() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     {{-- <div>
         <p> This is a test to see if I can return data to this page.</p>
         <ol>

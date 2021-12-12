@@ -12,7 +12,14 @@
     <div class=game_number> Game Number</div>
     <div class=game_total> The current total is: {{ $total }}</div>
     <div class=winning_score> The winning score is: {{ $winning_score }}</div>
-    <div class=winning_score> The maximum amount by which a player can advance the count is: {{ $$max_count }}</div>
+    <div class=winning_score> The maximum amount by which a player can advance the count is: {{ $$max_count }}
+        <ul>
+            <li>Game id: {{ $game['id'] }}</li>
+            <li>Winning Score: {{ $play['winning_score'] }}</li>
+            <li>Max Count: {{ $play['max_count'] }}</li>
+            <li>Current Total: {{ $game['total'] }}</li>
+        </ul>
+    </div>
 
     <p>hello world</p>
 
@@ -23,6 +30,14 @@
 
         <button type='submit'>Advance Count!</button>
     </form>
+
+    @if ($app->errorsExist())
+        <ul class='error alert alert-danger'>
+            @foreach ($app->errors() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 
     {{-- <div>
         <p> This is a test to see if I can return data to this page.</p>
