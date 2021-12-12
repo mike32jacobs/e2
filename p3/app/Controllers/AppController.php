@@ -52,14 +52,14 @@ class AppController extends Controller
         $this->winning_score=$number;
         $this->max_count=$count; 
 
-        dump($this->total);
-        dump($this->winning_score);
-        dump($this->max_count);
+        // dump($this->total);
+        // dump($this->winning_score);
+        // dump($this->max_count);
         
         //TODO: persist these results to database. Then let the play continue.
         //TODO: Change the value of the global variables
 
-        dump("you are inside of the initialize function");
+        // dump("you are inside of the initialize function");
 
         // return $this->app->view('play');
 
@@ -98,6 +98,10 @@ class AppController extends Controller
         $max_count=$this->app->old('max_count');
 
         dump($total,$winning_score,$max_count);
+
+        $this->total = $total;
+        $this->winning_score = $winning_score;
+        $this->max_count=$max_count;
 
         dump("you are inside of the play function");
         dump($this->total);
