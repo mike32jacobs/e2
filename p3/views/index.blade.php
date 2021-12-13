@@ -1,5 +1,8 @@
 @extends('templates/master')
 
+@if ($app->errorsExist())
+    <div test='error-alert' class='alert alert-danger'>Please correct the errors below</div>
+@endif
 
 @section('content')
 
@@ -25,7 +28,7 @@
     </form>
 
     @if ($app->errorsExist())
-        <ul class='error alert alert-danger'>
+        <ul test='error-messages' class='error alert alert-danger'>
             @foreach ($app->errors() as $error)
                 <li>{{ $error }}</li>
             @endforeach

@@ -4,16 +4,21 @@
     Play Game
 @endsection
 
+@if ($app->errorsExist())
+    <div test='error-alert' class='alert alert-danger'>Please correct the errors below</div>
+@endif
+
 @section('content')
 
     <h2>Nerd Count</h2>
-    <h3>By: Michael Jacobs</h3>
+    <h3 test='my_name'>By: Michael Jacobs</h3>
 
     <div class=game_number> Game id: {{ $game['id'] }}</div>
     <div class=game_total> The current total is: {{ $total }}</div>
     <div class=winning_score>
-        The winning score is: {{ $game['winning_score'] }}</div>
-    <div class=max_count> The maximum amount by which a player can advance the count is: {{ $game['max_count'] }}</div>
+        The winning score is: <span test='winning-score'>{{ $game['winning_score'] }}</span></div>
+    <div class=max_count> The maximum amount by which a player can advance the count is: <span
+            test='max-count'>{{ $game['max_count'] }}</span></div>
     <div class=timestamp>Timestamp: {{ $game['timestamp'] }}</div>
     <div class=winner>winner: {{ $game['winner'] }}
         @if (is_null($game['winner']))
@@ -37,7 +42,7 @@
     </form>
 
     @if ($app->errorsExist())
-        <ul class='error alert alert-danger'>
+        <ul test='validation-errors-alert' class='error alert alert-danger'>
             @foreach ($app->errors() as $error)
                 <li>{{ $error }}</li>
             @endforeach

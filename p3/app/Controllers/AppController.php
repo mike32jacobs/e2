@@ -105,8 +105,10 @@ class AppController extends Controller
 
         $game = $this->app->db()->findById('games', $id);
     
-        
-        return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
+        # Why does this 'view' work, but the 'redirect' does not?
+        return $this->app->view('/play', ['game'=>$game,'total'=>$this->total], );
+        // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
+
 
     }
     public function process()
@@ -116,14 +118,14 @@ class AppController extends Controller
             'choice'=> 'required',
         ]);
         
-        dump("you are inside of the process function");
+        // dump("you are inside of the process function");
         // Get user input from form
         $choice = (int)$this->app->input('choice');
-        dump('$choice', $choice);
+        // dump('$choice', $choice);
         $game_id = (int)$this->app->input('game_id');
-        dump('$game_id', $game_id);
+        // dump('$game_id', $game_id);
         $total = (int)$this->app->input('total');
-        dump('$total', $total);
+        // dump('$total', $total);
 
         // use the game_id to query the database
         $game = $this->app->db()->findById('games', $game_id);
@@ -147,7 +149,9 @@ class AppController extends Controller
             $this->app->db()->run($sql);
         }
         
-        return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
+        return $this->app->view('/play', ['game'=>$game,'total'=>$total]);
+        // return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
+
     }
 
     public function play()
