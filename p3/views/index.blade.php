@@ -15,8 +15,6 @@
         can advance the
         count by 1 or 2. You will take turns with the Nerd.</p>
 
-    <a href='/history'>See history of previous games.</a>
-
     <h3>Start a new game</h3>
     <form method='POST' action='/new'>
         <label for="winning-number">Choose the winning number: It must be greater than 10</label>

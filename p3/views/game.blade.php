@@ -23,14 +23,14 @@
             <th>Choice (Add how many?)</th>
         </tr>
         <?php
-        $i = 0;
-        while ($i < count($choices)) {
+        $i = count($choices) - 1;
+        while ($i > 0) {
             echo '<tr>' . PHP_EOL;
             echo '<td>' . $choices[$i]['player_id'] . '</td>' . PHP_EOL;
             echo '<td>' . $choices[$i]['total_before_choice'] . '</td>' . PHP_EOL;
             echo '<td>' . $choices[$i]['choice'] . '</td>' . PHP_EOL;
             echo '</tr>' . PHP_EOL;
-            $i++;
+            $i--;
         }
         ?>
     </table>

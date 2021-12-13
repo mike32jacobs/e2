@@ -24,6 +24,8 @@
     </header>
 
     <main>
+        <a href='/'>Home</a>
+        <a href='/history'>History</a>
         @yield('content')
     </main>
 
