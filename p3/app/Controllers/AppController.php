@@ -106,7 +106,7 @@ class AppController extends Controller
         $game = $this->app->db()->findById('games', $id);
     
         
-        return $this->app->view('play', ['game'=>$game,'total'=>$this->total], );
+        return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
 
     }
     public function process()
@@ -147,7 +147,7 @@ class AppController extends Controller
             $this->app->db()->run($sql);
         }
         
-        return $this->app->view('play', ['game'=>$game,'total'=>$total]);
+        return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
     }
 
     public function play()

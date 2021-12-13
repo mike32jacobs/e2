@@ -8,14 +8,14 @@
     <h2>Game Details</h2>
     <ul>
         <li>Game id: {{ $game['id'] }}</li>
-        <li>Winning Score: {{ $game['winning_score'] }}</li>
-        <li>Max Count: {{ $game['max_count'] }}</li>
+        <li>Winning Score: <span test='winning-score'>{{ $game['winning_score'] }}</span></li>
+        <li>Max Count: <span test='max-count'>{{ $game['max_count'] }}</span></li>
         <li>Winner: {{ $game['winner'] }}</li>
         <li>Time Stamp: {{ $game['timestamp'] }}</li>
 
     </ul>
 
-    <h2>Game Choices</h2>
+    <h2>Game History: Choice By Choice</h2>
     <table>
         <tr>
             <th>Player ID</th>
