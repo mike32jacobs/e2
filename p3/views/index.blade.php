@@ -10,6 +10,8 @@
     <h3>By: Michael Jacobs</h3>
 
     <p>This is the final project for DGMD E-2 WEB PROGRAMMING FOR BEGINNERS WITH PHP</p>
+    <img src="/images/Urkel.jpg" alt="Steve Urkel" width="25%">
+
     <h3>Instructions</h3>
     <p>The goal of the game is to be the person to advance the count to the winning number. Each time it is your turn, you
         can advance the

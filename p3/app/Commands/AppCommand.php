@@ -45,15 +45,19 @@ class AppCommand extends Command
         $this->app->db()->createTable('choices', [
             'player_id' => 'int',
             'game_id' => 'int',
-            'total_before_choice'=>'int',
+            'total'=>'int',
             'choice' => 'int', //thi will be an add 1 or add 2
         ]);
     }
 
     public function seedPlayers() 
     {
+        // Create a computer player
+        $this->app->db()->insert('players',[
+            'name'=>'computer'
+        ]);
         // Create two Players
-        for($i =1; $i<3;$i++){
+        for($i =2; $i<4;$i++){
             $this->app->db()->insert('players',[
                 'name'=>'player'.$i
             ]);
@@ -69,7 +73,7 @@ class AppCommand extends Command
             $this->app->db()->insert('games',[
                 'winning_score'=>21,
                 'max_count'=>2,
-                'winner'=> 1, #Player 1 will win both seeded games
+                'winner'=> 2, #Player 1 will win all seeded games
                 'player1_id'=>($j % 2 == 0) ? 1 : 2, # Alternate between player 1 and 2
                 'player2_id'=>($j % 2 == 0) ? 2 : 1, # Alternate between player 2 and 1,
                 'timestamp'=> $faker->dateTimeBetween('-'.$j.' days','-'.$j.' days')->format('Y-m-d H:m:s')
@@ -79,13 +83,13 @@ class AppCommand extends Command
     }
     public function seedChoices() 
     {
-        for($i =1; $i<3;$i++){
+        for($i =1; $i<4;$i++){
             // Create choices
-            for($k =0; $k<(21/$i);$k++){
+            for($k =1; $k<(22/$i);$k++){
                 $this->app->db()->insert('choices',[
-                'player_id'=>($k % 2 == 0) ? 1 : 2, # Alternate between player 1 and 2
+                'player_id'=>($k % 2 == 0) ? 1 : 2, # Alternate between computer and player 2
                 'game_id'=> $i,
-                'total_before_choice'=>$i*$k,
+                'total'=>$i*$k,
                 'choice'=>$i
             ]);
             }

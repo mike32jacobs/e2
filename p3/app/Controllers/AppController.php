@@ -21,9 +21,7 @@ class AppController extends Controller
 
     public function history()
     {
-        $games =$this->app->db()->all('games');
-        dump($games);
-        
+        $games =$this->app->db()->all('games');        
         return $this->app->view('history',['games'=>$games]);
     }
 
@@ -32,9 +30,6 @@ class AppController extends Controller
         $id = $this->app->param('id');
 
         $game = $this->app->db()->findById('games', $id);
-        
-        dump($game);
-
          
         // Find all of the choices with the current game
         //Create a custom command
@@ -43,8 +38,6 @@ class AppController extends Controller
 
         # A PDO method is used to extract the results
         $choices = $executed->fetchAll();
-        dump($choices);
-        
         
         return $this->app->view('game', ['game'=>$game, 'choices'=>$choices]);
     }
@@ -105,7 +98,7 @@ class AppController extends Controller
 
         $game = $this->app->db()->findById('games', $id);
     
-        # Why does this 'view' work, but the 'redirect' does not?
+        # Why does this 'view' work, but the 'redirect' does not? Because the view does not take things from the session. The redirect does...
         return $this->app->view('/play', ['game'=>$game,'total'=>$this->total], );
         // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
 
@@ -149,7 +142,7 @@ class AppController extends Controller
             $this->app->db()->run($sql);
         }
         
-        return $this->app->view('/play', ['game'=>$game,'total'=>$total]);
+        return $this->app->view('/process', ['game'=>$game,'total'=>$total]);
         // return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
 
     }
@@ -157,7 +150,7 @@ class AppController extends Controller
     public function play()
     {
        
-       
+       // Get data from the session
         $total=$this->app->old('total');
         $winning_score=$this->app->old('winning_score');
         $max_count=$this->app->old('max_count');
@@ -172,18 +165,30 @@ class AppController extends Controller
         dump($this->total);
         dump($this->winning_score);
         dump($this->max_count);
-        return $this->app->view('play');
+        // return $this->app->view('play');
     }
 
-    public function nerd_turn()
+    public function player_move($player_id, $game_id,$choice)
     {
-        $choice = rand(1,$this->max_count);
-        $this->advance_count($choice);
+        //use the game id to get the winning number
+        $game = $this->app->db()->findById('games', $game_id);
+
+        // Get the current
+
+
+
+        // Write the choice to the database, then update the total and turn
+        $this->app->db()->insert('choices',[
+            'player_id' => $player_id,
+            'game_id'=>$game_id,
+            'total_before_choice'=> $total,
+            'choice'=> $choice,
+        ]);
+
+        $total = $choice + $total;
+
     }
-    // public function new_game()
-    // {
-    //     ;
-    // }
+    
     public function advance_count($choice)
     {
         $this->total=$this->total + $choice;

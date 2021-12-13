@@ -6,6 +6,7 @@
 
 @section('content')
     <h2>Game Details</h2>
+    <img src="/images/hopper.jpg" alt="Grace Murray Hopper" width="25%">
     <ul>
         <li>Game id: {{ $game['id'] }}</li>
         <li>Winning Score: <span test='winning-score'>{{ $game['winning_score'] }}</span></li>
@@ -19,15 +20,15 @@
     <table>
         <tr>
             <th>Player ID</th>
-            <th>Total Score Before Choice</th>
-            <th>Choice (Add how many?)</th>
+            <th>Total Score After Move</th>
+            <th>Move (Add how many?)</th>
         </tr>
         <?php
         $i = count($choices) - 1;
-        while ($i > 0) {
+        while ($i >= 0) {
             echo '<tr>' . PHP_EOL;
             echo '<td>' . $choices[$i]['player_id'] . '</td>' . PHP_EOL;
-            echo '<td>' . $choices[$i]['total_before_choice'] . '</td>' . PHP_EOL;
+            echo '<td>' . $choices[$i]['total'] . '</td>' . PHP_EOL;
             echo '<td>' . $choices[$i]['choice'] . '</td>' . PHP_EOL;
             echo '</tr>' . PHP_EOL;
             $i--;
