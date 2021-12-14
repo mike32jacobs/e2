@@ -16,7 +16,8 @@
 
 
     <div class=game_number> Game id: {{ $game['id'] }}</div>
-    <div class=game_total> The current total is: {{ $total }}</div>
+    {{-- if ($choices[0]['total']is empty --}}
+    <div class=game_total> The current total is: {{ $choices[0]['total'] }}</div>
     <div class=winning_score>
         The winning score is: <span test='winning-score'>{{ $game['winning_score'] }}</span></div>
     <div class=max_count> The maximum amount by which a player can advance the count is: <span
@@ -67,7 +68,7 @@
         while ($i > 0) {
             echo '<tr>' . PHP_EOL;
             echo '<td>' . $choices[$i]['player_id'] . '</td>' . PHP_EOL;
-            echo '<td>' . $choices[$i]['total_before_choice'] . '</td>' . PHP_EOL;
+            echo '<td>' . $choices[$i]['total'] . '</td>' . PHP_EOL;
             echo '<td>' . $choices[$i]['choice'] . '</td>' . PHP_EOL;
             echo '</tr>' . PHP_EOL;
             $i--;

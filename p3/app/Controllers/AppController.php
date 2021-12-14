@@ -71,9 +71,6 @@ class AppController extends Controller
         $this->winning_score=$number;
         $this->max_count=$count; 
 
-        // dump($this->total);
-        // dump($this->winning_score);
-        // dump($this->max_count);
         
         //TODO: persist these results to database. Then let the play continue.
 
@@ -98,8 +95,16 @@ class AppController extends Controller
 
         $game = $this->app->db()->findById('games', $id);
     
-        # Why does this 'view' work, but the 'redirect' does not? Because the view does not take things from the session. The redirect does...
-        return $this->app->view('/play', ['game'=>$game,'total'=>$this->total], );
+        // Find all of the choices with the current game
+        //Create a custom command
+        $sql ='SELECT * FROM choices WHERE game_id ='.$id;
+        $executed = $this->app->db()->run($sql);
+        # A PDO method is used to extract the results
+        $choices = $executed->fetchAll();
+        dump('$choices', $choices);
+        dump($choices[0]['total']);
+        
+        return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
         // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
 
 
@@ -120,30 +125,32 @@ class AppController extends Controller
         $total = (int)$this->app->input('total');
         // dump('$total', $total);
 
-        // use the game_id to query the database
-        $game = $this->app->db()->findById('games', $game_id);
+        return $this->player_move(1,$game_id,$choice );
 
-        // Write the choice to the database, then update the total and turn
-        $this->app->db()->insert('choices',[
-            'player_id' => 1,
-            'game_id'=>$game_id,
-            'total_before_choice'=> $total,
-            'choice'=> $choice,
-        ]);
+        // // use the game_id to query the database
+        // $game = $this->app->db()->findById('games', $game_id);
 
-        $total = $choice + $total;
+        // // Write the choice to the database, then update the total and turn
+        // $this->app->db()->insert('choices',[
+        //     'player_id' => 1,
+        //     'game_id'=>$game_id,
+        //     'total_before_choice'=> $total,
+        //     'choice'=> $choice,
+        // ]);
+
+        // $total = $choice + $total;
         
     
-        //Check to see if the total is >= winning_score
-        if($total >= $game['winning_score']){
-            //Game is over. The current player is the winner
-            //Create a custom command
-            $sql ='UPDATE games SET winner=2 WHERE id ='.$game_id.';';
-            $this->app->db()->run($sql);
-        }
+        // //Check to see if the total is >= winning_score
+        // if($total >= $game['winning_score']){
+        //     //Game is over. The current player is the winner
+        //     //Create a custom command
+        //     $sql ='UPDATE games SET winner=2 WHERE id ='.$game_id.';';
+        //     $this->app->db()->run($sql);
+        // }
         
-        return $this->app->view('/process', ['game'=>$game,'total'=>$total]);
-        // return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
+        // return $this->app->view('/process', ['game'=>$game,'total'=>$total]);
+        // // return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
 
     }
 
@@ -170,22 +177,47 @@ class AppController extends Controller
 
     public function player_move($player_id, $game_id,$choice)
     {
-        //use the game id to get the winning number
+        
+        //use the game id to get the information about the game so far.
         $game = $this->app->db()->findById('games', $game_id);
+        
+        // Find all of the choices with the current game
+        //Create a custom command
+        $sql ='SELECT * FROM choices WHERE game_id ='.$game_id;
+        $executed = $this->app->db()->run($sql);
+        # A PDO method is used to extract the results
+        $choices = $executed->fetchAll();
 
-        // Get the current
+        //If choices is empty, then this is the first move of the game. The total is zero. IF it is not empty, then find the last entry to get the previous total.
+        if (empty($choices)){
+            $total = 0;
+        }else{
+            //If choices is not empty, then see how many choices have been made so far.
+            // Find how many rows are in the database
+            $number_rows =count($choices);
+            $total = $choices[$number_rows-1]['total'];
+        }
 
-
+        // update the total
+        $total = $total + $choice;
 
         // Write the choice to the database, then update the total and turn
         $this->app->db()->insert('choices',[
             'player_id' => $player_id,
             'game_id'=>$game_id,
-            'total_before_choice'=> $total,
+            'total'=> $total,
             'choice'=> $choice,
         ]);
 
-        $total = $choice + $total;
+        //update the $choices variable
+        // Find all of the choices with the current game
+        //Create a custom command
+        $sql ='SELECT * FROM choices WHERE game_id ='.$game_id;
+        $executed = $this->app->db()->run($sql);
+        # A PDO method is used to extract the results
+        $choices = $executed->fetchAll();
+        
+        return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
 
     }
     
