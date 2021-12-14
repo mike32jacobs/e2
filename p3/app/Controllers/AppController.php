@@ -54,10 +54,6 @@ class AppController extends Controller
         $number = $this->app->input('winning-number');
         $count = $this->app->input('max-count');
 
-        // dump($number, $count);
-
-        //By default, the game is played to 21, with an ability to advance by 1 or 2. .
-
         if ($number == null){
             $number=21;
         }
@@ -95,15 +91,14 @@ class AppController extends Controller
 
         $game = $this->app->db()->findById('games', $id);
     
-        // Find all of the choices with the current game
+        // Find all of the choices with the current game.
+        // The Choices array will be empty initially. The blade template will account for that.
         //Create a custom command
         $sql ='SELECT * FROM choices WHERE game_id ='.$id;
         $executed = $this->app->db()->run($sql);
         # A PDO method is used to extract the results
-        $choices = $executed->fetchAll();
-        dump('$choices', $choices);
-        dump($choices[0]['total']);
-        
+        $choices = $executed->fetchAll(); 
+     
         return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
         // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
 
@@ -116,14 +111,10 @@ class AppController extends Controller
             'choice'=> 'required',
         ]);
         
-        // dump("you are inside of the process function");
         // Get user input from form
         $choice = (int)$this->app->input('choice');
-        // dump('$choice', $choice);
         $game_id = (int)$this->app->input('game_id');
-        // dump('$game_id', $game_id);
         $total = (int)$this->app->input('total');
-        // dump('$total', $total);
 
         return $this->player_move(1,$game_id,$choice );
 

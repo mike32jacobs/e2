@@ -17,7 +17,12 @@
 
     <div class=game_number> Game id: {{ $game['id'] }}</div>
     {{-- if ($choices[0]['total']is empty --}}
-    <div class=game_total> The current total is: {{ $choices[0]['total'] }}</div>
+    @if (empty($choices))
+        <div class=game_total> The current total is: 0</div>
+    @else
+        <div class=game_total> The current total is: {{ $choices[0]['total'] }}</div>
+    @endif
+
     <div class=winning_score>
         The winning score is: <span test='winning-score'>{{ $game['winning_score'] }}</span></div>
     <div class=max_count> The maximum amount by which a player can advance the count is: <span
