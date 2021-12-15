@@ -116,34 +116,9 @@ class AppController extends Controller
         // Get user input from form
         $choice = (int)$this->app->input('choice');
         $game_id = (int)$this->app->input('game_id');
-        $total = (int)$this->app->input('total');
+        // $total = (int)$this->app->input('total');
 
         return $this->player_move(1,$game_id,$choice );
-
-        // // use the game_id to query the database
-        // $game = $this->app->db()->findById('games', $game_id);
-
-        // // Write the choice to the database, then update the total and turn
-        // $this->app->db()->insert('choices',[
-        //     'player_id' => 1,
-        //     'game_id'=>$game_id,
-        //     'total_before_choice'=> $total,
-        //     'choice'=> $choice,
-        // ]);
-
-        // $total = $choice + $total;
-        
-    
-        // //Check to see if the total is >= winning_score
-        // if($total >= $game['winning_score']){
-        //     //Game is over. The current player is the winner
-        //     //Create a custom command
-        //     $sql ='UPDATE games SET winner=2 WHERE id ='.$game_id.';';
-        //     $this->app->db()->run($sql);
-        // }
-        
-        // return $this->app->view('/process', ['game'=>$game,'total'=>$total]);
-        // // return $this->app->redirect('/play', ['game'=>$game,'total'=>$total]);
 
     }
 
@@ -192,30 +167,45 @@ class AppController extends Controller
         }
 
         // update the total
-        $total = $total + $choice;
+        $new_total = $total + $choice;
 
-        // Write the choice to the database, then update the total and turn
+        // Write the choice to the database
         $this->app->db()->insert('choices',[
             'player_id' => $player_id,
             'game_id'=>$game_id,
-            'total'=> $total,
+            'total'=> $new_total,
             'choice'=> $choice,
         ]);
 
         //update the $choices variable
         // Find all of the choices with the current game
         //Create a custom command
-        $sql ='SELECT * FROM choices WHERE game_id ='.$game_id;
-        $executed = $this->app->db()->run($sql);
+        $sql1 ='SELECT * FROM choices WHERE game_id ='.$game_id.';';
+        $executed = $this->app->db()->run($sql1);
         # A PDO method is used to extract the results
         $choices = $executed->fetchAll();
+
+        //Check to see if the game is over
+
+        if ($new_total >= $game['winning_score']){
+            //There is a winner. Update the Database, and send the user to the Game History Page
+            //Create custom commands
+            $sql2 ='UPDATE games SET game_over=true WHERE id='.$game_id.';';
+            $executed = $this->app->db()->run($sql2);
+            $sql3 ='UPDATE games SET winner='.$player_id.' WHERE id='.$game_id.';';
+            $executed = $this->app->db()->run($sql3);
+            return $this->app->redirect('game?id='.$game['id']);
+
+        }
         
         return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
 
     }
+
+
     
-    public function advance_count($choice)
+    public function computer_move($choice)
     {
-        $this->total=$this->total + $choice;
+
     }
 }

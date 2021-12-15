@@ -40,6 +40,7 @@ class AppCommand extends Command
             'player1_id'=> 'int',
             'player2_id'=> 'int',
             'timestamp'=> 'timestamp',
+            'game_over'=>'boolean'
         ]);
 
         $this->app->db()->createTable('choices', [
@@ -68,15 +69,16 @@ class AppCommand extends Command
     {
         $faker = Factory::create();
 
-        // Create two games
-        for($j =1; $j<3;$j++){
+        // Create three games
+        for($j =0; $j<3;$j++){
             $this->app->db()->insert('games',[
                 'winning_score'=>21,
                 'max_count'=>2,
-                'winner'=> 2, #Player 1 will win all seeded games
+                'winner'=> 2, #Player 2 will win all seeded games
                 'player1_id'=>($j % 2 == 0) ? 1 : 2, # Alternate between player 1 and 2
                 'player2_id'=>($j % 2 == 0) ? 2 : 1, # Alternate between player 2 and 1,
-                'timestamp'=> $faker->dateTimeBetween('-'.$j.' days','-'.$j.' days')->format('Y-m-d H:m:s')
+                'timestamp'=> $faker->dateTimeBetween('-'.$j.' days','-'.$j.' days')->format('Y-m-d H:m:s'),
+                'game_over'=>true
             ]);
         } 
         dump('Games table has been seeded.');

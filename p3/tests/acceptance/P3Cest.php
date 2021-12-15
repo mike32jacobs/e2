@@ -61,4 +61,17 @@ class P3Cest
         // $I->see($errorMessage2,'[test=error-messages]');
 
     }
+    public function radio_button_count(AcceptanceTester $I)
+    {
+        // Initiate the game with good data. If the max count is set to 4, then we should see 4 radio buttons
+        $I->amOnPage('/');
+        $I->fillField('[test=winning-number-input]',15);
+        $I->fillField('[test=max-count-input]',4);
+        $I->click('[test=submit-button]');
+
+        $I->amOnPage('/play');
+ 
+        $I->see('Add 3 to Count');
+
+    }
 }
