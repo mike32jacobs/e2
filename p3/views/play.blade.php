@@ -20,7 +20,12 @@
     @if (empty($choices))
         <div class=game_total> The current total is: 0</div>
     @else
-        <div class=game_total> The current total is: {{ $choices[0]['total'] }}</div>
+        <div class=game_total> The current total is:
+            <?php
+            $num_choices = count($choices) - 1;
+            echo $choices[$num_choices]['total'];
+            ?>
+        </div>
     @endif
 
     <div class=winning_score>
@@ -51,6 +56,8 @@
 
     <form method='POST' action='/process'>
 
+
+
         <input type='radio' name="choice" value="1" id='count1' checked='checked'><label for='count1'>Add 1 to Count</label>
         <input type='radio' name="choice" value="2" id='count2'><label for='count2'>Add 2 to Count</label>
         <input type="hidden" name="game_id" id="game_id" value="{{ $game['id'] }}">
@@ -65,7 +72,7 @@
     <table>
         <tr>
             <th>Player ID</th>
-            <th>Total Score Before Choice</th>
+            <th>Total Count</th>
             <th>Choice (Add how many?)</th>
         </tr>
         <?php

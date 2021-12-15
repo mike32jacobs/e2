@@ -100,6 +100,8 @@ class AppController extends Controller
         $choices = $executed->fetchAll(); 
      
         return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
+
+        // return $this->app->redirect('/process', ['game'=>$game,'choices'=>$choices]);
         // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
 
 
