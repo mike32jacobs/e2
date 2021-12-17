@@ -14,42 +14,43 @@
     <h3 test='my_name'>By: Michael Jacobs</h3>
     <img src="/images/scholnick.jpg" alt="Lewis Scholnick" width="25%">
 
-
-    <div class=game_number> Game id: {{ $game['id'] }}</div>
-    {{-- if ($choices[0]['total']is empty --}}
-    @if (empty($choices))
-        <div class=game_total> The current total is: 0</div>
-    @else
-        <div class=game_total> The current total is:
-            <?php
-            $num_choices = count($choices) - 1;
-            echo $choices[$num_choices]['total'];
-            ?>
+    <div class="row">
+        <div class="column" style="background-color:#ccc;" class='winner'>
+            <h2>winner:</h2>
+            <p>{{ $game['winner'] }}
+                @if (is_null($game['winner']))
+                    no winner yet
+                @endif
+            </p>
         </div>
-    @endif
-
-    <div class='winning_score'>
-        The winning score is: <span test='winning-score'>{{ $game['winning_score'] }}</span></div>
-    <div class='max_count'> The maximum amount by which a player can advance the count is: <span
-            test='max-count'>{{ $game['max_count'] }}</span></div>
-    <div class='timestamp'>Timestamp: {{ $game['timestamp'] }}</div>
-    <div class='winner'>winner: {{ $game['winner'] }}
-        @if (is_null($game['winner']))
-            no winner yet
+        {{-- if ($choices[0]['total']is empty --}}
+        @if (empty($choices))
+            <div class="column" style="background-color:#bbb;" class='game_total'>
+                <h2>The current total is:</h2>
+                <p> 0</p>
+            </div>
+        @else
+            <div class="column" style="background-color:#bbb;" class='game_total'>
+                <h2>The current total is:</h2>
+                <p>
+                    <?php
+                    $num_choices = count($choices) - 1;
+                    echo $choices[$num_choices]['total'];
+                    ?></p>
+            </div>
         @endif
+
+        <div class="column" style="background-color:#ccc;" class='winning_score'>
+            <h2>The winning score is:</h2>
+            <p> <span test='winning-score'>{{ $game['winning_score'] }}</span></p>
+        </div>
+        <div class="column" style="background-color:#ddd;" class='max_count'>
+            <h2> The maximum amount by which a player
+                can advance the count is:</h2>
+            <p> <span test='max-count'>{{ $game['max_count'] }}</span></p>
+        </div>
+
     </div>
-    <ul>
-        <li>Game id: {{ $game['id'] }}</li>
-        <li>Winning Score: <span test='winning-score'>{{ $game['winning_score'] }}</span></li>
-        <li>Max Count: <span test='max-count'>{{ $game['max_count'] }}</span></li>
-        <li>Winner: @if (is_null($game['winner']))
-                no winner yet
-            @endif {{ $game['winner'] }}</li>
-        <li>Time Stamp: {{ $game['timestamp'] }}</li>
-
-    </ul>
-
-
 
 
     <p>Choose the amount by which you would like to advance the count.</p>
@@ -57,7 +58,8 @@
     <form method='POST' action='/process'>
 
 
-        <input type='radio' name="choice" value="1" id='count1' checked='checked'><label for='count1'>Add 1 to Count</label>
+        <input type='radio' name="choice" value="1" id='count1' checked='checked'><label for='count1'>Add 1 to
+            Count</label>
         <input type='radio' name="choice" value="2" id='count2'><label for='count2'>Add 2 to Count</label>
         @if ($game['max_count'] > 2)
             <input type='radio' test='add-3-radio' name="choice" value="3" id='count3' checked='checked'><label
