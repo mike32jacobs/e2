@@ -25,7 +25,7 @@
 
     <main>
         <a href='/'>Home</a>
-        <a href='/history'>History</a>
+        <a href='/history' test='history-link'>History</a>
         @yield('content')
     </main>
 

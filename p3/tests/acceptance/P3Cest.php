@@ -74,4 +74,19 @@ class P3Cest
         $I->see('Add 3 to Count');
 
     }
+
+    public function history(AcceptanceTester $I)
+    {
+        // Don't input any data to the form
+        $I->amOnPage('/');
+
+        $I->click('[test=history-link]');
+
+
+        $I->amOnPage('/history');
+
+        $I->seeInTitle('Game History');
+        $I->see('Game History');
+
+    }
 }

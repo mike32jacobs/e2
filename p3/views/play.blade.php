@@ -28,12 +28,12 @@
         </div>
     @endif
 
-    <div class=winning_score>
+    <div class='winning_score'>
         The winning score is: <span test='winning-score'>{{ $game['winning_score'] }}</span></div>
-    <div class=max_count> The maximum amount by which a player can advance the count is: <span
+    <div class='max_count'> The maximum amount by which a player can advance the count is: <span
             test='max-count'>{{ $game['max_count'] }}</span></div>
-    <div class=timestamp>Timestamp: {{ $game['timestamp'] }}</div>
-    <div class=winner>winner: {{ $game['winner'] }}
+    <div class='timestamp'>Timestamp: {{ $game['timestamp'] }}</div>
+    <div class='winner'>winner: {{ $game['winner'] }}
         @if (is_null($game['winner']))
             no winner yet
         @endif
