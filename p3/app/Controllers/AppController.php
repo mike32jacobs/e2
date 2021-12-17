@@ -101,8 +101,7 @@ class AppController extends Controller
      
         return $this->app->view('/play', ['game'=>$game,'choices'=>$choices]);
 
-        // return $this->app->redirect('/process', ['game'=>$game,'choices'=>$choices]);
-        // return $this->app->redirect('/play', ['game'=>$game,'total'=>$this->total], );
+
 
 
     }
@@ -242,7 +241,7 @@ class AppController extends Controller
             'choice'=> $choice,
         ]);
 
-        //update the $choices variable
+        // Update the $choices variable
         // Find all of the choices with the current game
         //Create a custom command
         $sql1 ='SELECT * FROM choices WHERE game_id ='.$game_id.';';
